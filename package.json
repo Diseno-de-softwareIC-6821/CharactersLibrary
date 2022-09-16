@@ -2,10 +2,10 @@
   "name": "characterslibrary",
   "version": "1.0.0",
   "description": "Videogame entity generator wrote in typescript",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "npx ts-node index.ts"
+    "dev": "npx ts-node src/index.ts"
   },
   "repository": {
     "type": "git",
