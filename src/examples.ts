@@ -64,3 +64,47 @@ for (let number of numbers) {
 numbers.map((number) => {
     console.log(number);
 });
+
+const enteros: number[] = [1,2,3,4,5,6,7,8,9,10];
+
+
+// for with length
+for (let i = 0; i < enteros.length; i++) {
+  console.log(enteros[i]);
+}
+
+//forEach 
+enteros.forEach((element) => {
+  console.log(element);
+});
+
+
+//map
+const enterosDobles = enteros.map((element) => {
+  return element * 2;
+});
+
+// For of
+for(let x of enteros){
+  console.log(x);
+  x = 0
+}
+
+console.log(enteros);
+
+
+// para cuando la llamada puede estar en cualquier lugar del codigo
+function nombre(): void{
+    console.log("Hola");
+}
+
+// para llamadas dentro de otras funciones
+(param1: any, param2: any): number => {
+    return param1 + param2;
+}
+
+// para cuando la llamada esta OBLIGATORIAMETE despues de la declaracion
+const varFunc = (param1: any, param2: any): number => {
+    return param1 + param2;
+}
+
