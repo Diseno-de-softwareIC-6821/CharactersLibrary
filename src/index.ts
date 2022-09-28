@@ -4,8 +4,8 @@
 function main(): void {
   console.log("Hello, World!");
 
-  const change = 'conflict'
-
+  const change = "this is a change in the new branch";
+  
 }
 
 
