@@ -1,4 +1,5 @@
 import { iLeveled } from "../Interfaces/iLeveled";
+import { Item } from "./Item";
 
 export class Character implements iLeveled{
     
@@ -23,7 +24,6 @@ export class Character implements iLeveled{
         this.items = items;
         this.name = name;
     }
-
 
     levelUp(): void {
         throw new Error("Method not implemented.");
@@ -83,6 +83,11 @@ export class Character implements iLeveled{
             return this;
         }
 
+        addImage(image: string, name: string): CharacterBuilder {
+            this.appearance.set(name, image);
+            return this;
+        }
+
         setHealth(health: number): CharacterBuilder {
             this.health = health;
             return this;
@@ -93,6 +98,11 @@ export class Character implements iLeveled{
             return this;
         }
 
+        addItem(item: Item): CharacterBuilder {
+                
+            this.items.push(item);
+            return this;
+        }
         
 
         setName(name: string): CharacterBuilder {
