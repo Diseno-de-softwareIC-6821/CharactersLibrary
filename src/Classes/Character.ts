@@ -1,4 +1,4 @@
-import { iLeveled } from "../Interfaces/iLeveled";
+import { ILeveled } from "../Interfaces/ILeveled";
 import { Item } from "./Item";
 
 export class Character implements iLeveled{
@@ -29,6 +29,10 @@ export class Character implements iLeveled{
         throw new Error("Method not implemented.");
     }
 
+    levelDown(): void {
+        throw new Error("Method not implemented.");
+    }
+
     // Character builder inner class
     static CharacterBuilder = class CharacterBuilder{
         private speed: number;
@@ -41,16 +45,16 @@ export class Character implements iLeveled{
         private items: Item[];
         private name: string;
 
-        constructor(speed: number, housingSpace: number, cost: number, spawnLevel: number, dps: number, appearance: Map<string, string>, health: number, items: Item[], name: string) {
-            this.speed = speed;
-            this.housingSpace = housingSpace;
-            this.cost = cost;
-            this.spawnLevel = spawnLevel;
-            this.dps = dps;
-            this.appearance = appearance;
-            this.health = health;
-            this.items = items;
-            this.name = name;
+        constructor() {
+            this.speed = 0;
+            this.housingSpace = 0;
+            this.cost = 0;
+            this.spawnLevel = 0;
+            this.dps = 0;
+            this.appearance = new Map<string, string>();
+            this.health = 0;
+            this.items = [];
+            this.name = "";
         }
 
         setSpeed(speed: number): CharacterBuilder{
