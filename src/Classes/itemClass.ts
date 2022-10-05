@@ -1,5 +1,7 @@
+import { ILeveled } from "../Interfaces/ILeveled";
 
-abstract class AItem implements ILeveled {
+
+export abstract class AItem implements ILeveled {
    // private _name: string;
 
     constructor(

@@ -1,5 +1,6 @@
+import { AItem } from "./itemClass";
 
-class Skill extends AItem{ //here need to extends from AItem
+export class Skill extends AItem{ //here need to extends from AItem
     private duration :number;
 
     constructor(name:string, type:EType , level:number,  scope:number, duration:number){

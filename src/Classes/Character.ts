@@ -1,7 +1,7 @@
 import { ILeveled } from "../Interfaces/ILeveled";
-import { Item } from "./Item";
+import { AItem } from "./itemClass";
 
-export class Character implements iLeveled{
+export class Character implements ILeveled {
     
     speed: number;
     housingSpace: number;
@@ -10,10 +10,10 @@ export class Character implements iLeveled{
     dps: number;
     appearance: Map<string, string>;
     health: number;
-    items: Item[];
+    items: AItem[];
     name: string;
 
-    constructor(speed: number, housingSpace: number, cost: number, spawnLevel: number, dps: number, appearance: Map<string, string>, health: number, items: Item[], name: string) {
+    constructor(speed: number, housingSpace: number, cost: number, spawnLevel: number, dps: number, appearance: Map<string, string>, health: number, items: AItem[], name: string) {
         this.speed = speed;
         this.housingSpace = housingSpace;
         this.cost = cost;
@@ -42,7 +42,7 @@ export class Character implements iLeveled{
         private dps: number;
         private appearance: Map<string, string>;
         private health: number;
-        private items: Item[];
+        private items: AItem[];
         private name: string;
 
         constructor() {
@@ -97,12 +97,12 @@ export class Character implements iLeveled{
             return this;
         }
 
-        setItems(items: Item[]): CharacterBuilder {
+        setItems(items: AItem[]): CharacterBuilder {
             this.items = items;
             return this;
         }
 
-        addItem(item: Item): CharacterBuilder {
+        addItem(item: AItem): CharacterBuilder {
                 
             this.items.push(item);
             return this;
