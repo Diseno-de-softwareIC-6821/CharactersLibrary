@@ -1,4 +1,6 @@
-class Weapon extends AItem{
+import { AItem } from "./itemClass";
+
+export class Weapon extends AItem{
     private damage :number;
     private exploRange :number;
     private weaponType :eWeapon;
