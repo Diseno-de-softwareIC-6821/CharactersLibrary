@@ -1,7 +1,8 @@
-import { ILeveled } from "../Interfaces/ILeveled";
+import { ILeveled } from "../Interfaces/iLeveled";
+import { IPrototype } from "../Interfaces/iPrototype";
 import { AItem } from "./itemClass";
 
-export class Character implements ILeveled {
+export class Character implements ILeveled, IPrototype {
     
     speed: number;
     housingSpace: number;
@@ -32,6 +33,25 @@ export class Character implements ILeveled {
     levelDown(): void {
         throw new Error("Method not implemented.");
     }
+
+    clone(): Character {
+        return new Character(this.speed, this.housingSpace, this.cost, this.spawnLevel, this.dps, this.appearance, this.health, this.items, this.name);
+    }
+
+    deepClone(): Character {
+        //deep clone of appearance
+        const appearance = new Map<string, string>();
+        this.appearance.forEach((value, key) => {
+            appearance.set(key, value);
+        });
+
+        //deep clone of items
+        const items = this.items.map(item => item.deepClone());
+
+        return new Character(this.speed, this.housingSpace, this.cost, this.spawnLevel, this.dps, appearance, this.health, items, this.name);
+
+    }
+
 
     // Character builder inner class
     static CharacterBuilder = class CharacterBuilder{
