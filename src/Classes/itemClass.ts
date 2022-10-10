@@ -1,4 +1,4 @@
-import { ILeveled } from "../Interfaces/ILeveled";
+import { ILeveled } from "../Interfaces/iLeveled";
 
 
 export abstract class AItem implements ILeveled {

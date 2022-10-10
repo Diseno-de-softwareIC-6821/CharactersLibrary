@@ -1,8 +1,4 @@
-
-export interface ILeveled {
-   //type: string;
-   
+export interface ILeveled {   
    levelUp(): void;
    levelDown(): void;
-
-  }
+}
