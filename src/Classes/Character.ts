@@ -46,7 +46,7 @@ export class Character implements ILeveled, IPrototype {
         });
 
         //deep clone of items
-        const items = this.items.map(item => item.clone());
+        const items = this.items.map(item => item.deepClone());
 
         return new Character(this.speed, this.housingSpace, this.cost, this.spawnLevel, this.dps, appearance, this.health, items, this.name);
 

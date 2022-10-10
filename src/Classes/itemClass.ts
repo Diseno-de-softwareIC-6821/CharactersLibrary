@@ -1,7 +1,8 @@
 import { ILeveled } from "../Interfaces/iLeveled";
+import { IPrototype } from "../Interfaces/iPrototype";
 
 
-export abstract class AItem implements ILeveled {
+export abstract class AItem implements ILeveled, IPrototype {
    // private _name: string;
 
     constructor(
@@ -36,6 +37,14 @@ export abstract class AItem implements ILeveled {
     levelDown(): void {
         this.level -= 1;
         //CODIGO PARA BAJAR DE NIVEL
+    }
+
+    // Declarations in order to be able to use the methods in Character class before they are implemented
+    clone(): any{
+
+    }
+    deepClone(): any{
+
     }
 
   }

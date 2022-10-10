@@ -18,9 +18,7 @@ function main(): void {
     .setName("name")
     .build();
 
-  const character2 = character.clone();
-  character.appearance.set('head', 'head2');
-  console.log(character2.appearance.get('head'));
+  console.log(JSON.parse(JSON.stringify(character)));
 
 }
 
