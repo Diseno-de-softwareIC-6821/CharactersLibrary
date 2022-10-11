@@ -3,8 +3,9 @@ import { IPrototype } from './iPrototype';
 export interface IPrototypeFactory {
 
     prototypes: Map<string, IPrototype>;
-    
-    getPrototype(type: string): IPrototype;
+
+    getClone(type: string): IPrototype;
+    getDeepClone(type: string): IPrototype;
     addPrototype(type: string, prototype: IPrototype): void;
 
 }
