@@ -1,6 +1,6 @@
 import { AItem } from "./itemClass";
 import { IPrototype } from '../Interfaces/iPrototype';
-import { ILeveled } from '../Interfaces/ILeveled';
+import { ILeveled } from '../Interfaces/iLeveled';
 export class Skill extends AItem implements ILeveled,IPrototype{ //here need to extends from AItem
     private duration :number;
 
