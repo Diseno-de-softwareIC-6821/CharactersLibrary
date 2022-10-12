@@ -39,4 +39,21 @@ export abstract class AItem implements ILeveled {
     }
 
   }
-  
+
+// class HealingItem extends AItem{
+//     // public HealingItem(): any{
+
+//     // }
+// }
+
+// class DamageItem extends AItem{
+
+// }
+
+// class NeutralizerItem extends AItem{
+
+// }
+
+// class IncreaserItem extends AItem{
+
+// }

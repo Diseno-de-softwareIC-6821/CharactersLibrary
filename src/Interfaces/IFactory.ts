@@ -1,9 +1,10 @@
 import { Character } from "../Classes/Character";
+import { AItem } from "../Classes/itemClass";
 
 export interface IFactory {
 
-    operation(): string;
-    
- 
+    getObject(eNum: Enumerator): any;
+    getN(eNum: Enumerator, n: number): any;
+
    }
  
