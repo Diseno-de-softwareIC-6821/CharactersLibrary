@@ -1,15 +1,15 @@
 import { IJson } from "../Interfaces/iJson";
-import { ILeveled } from "../Interfaces/iLeveled";
+import { ILeveled } from "../Interfaces/ILeveled";
 import { IPrototype } from "../Interfaces/iPrototype";
-import { AItem } from "./itemClass";
+import { Item } from "./Item";
 
 export class Character implements ILeveled, IPrototype, IJson {
     
     textureMap: Map<number, string>;
     currentTexture: string;
 
-    items: AItem[];
-    selectedItem: AItem | null;
+    items: Item[];
+    selectedItem: Item | undefined;
 
     name: string;
     level: number;
@@ -32,8 +32,8 @@ export class Character implements ILeveled, IPrototype, IJson {
     constructor(
         textureMap: Map<number, string>, 
         currentTexture: string,
-        items: AItem[], 
-        selectedItem: AItem | null,
+        items: Item[], 
+        selectedItem: Item | undefined,
         name: string,
         level: number, 
         experience: number,
@@ -80,7 +80,7 @@ export class Character implements ILeveled, IPrototype, IJson {
         }
     }
 
-    getItems(): AItem[] {
+    getItems(): Item[] {
         return this.items;
     }
 
@@ -89,7 +89,7 @@ export class Character implements ILeveled, IPrototype, IJson {
     }
 
     setSelectedItem(itemName: string): void {
-        this.selectedItem = this.items.filter((item: AItem) => item.getName() === itemName)[0];
+        this.selectedItem = this.items.filter((item: Item) => item.getName() === itemName)[0];
     }
 
     move(posX: number, posY: number): void{
@@ -177,8 +177,8 @@ export class Character implements ILeveled, IPrototype, IJson {
         textureMap: Map<number, string>;
         currentTexture: string;
 
-        items: AItem[];
-        selectedItem: AItem | null;
+        items: Item[];
+        selectedItem: Item | undefined;
     
         name: string;
         level: number;
@@ -203,7 +203,7 @@ export class Character implements ILeveled, IPrototype, IJson {
             this.currentTexture = "";
 
             this.items = [];
-            this.selectedItem = null;
+            this.selectedItem = undefined;
 
             this.name = "";
             this.level = 0;
@@ -234,12 +234,12 @@ export class Character implements ILeveled, IPrototype, IJson {
             return this;
         }
 
-        setItems(items: AItem[]): CharacterBuilder {
+        setItems(items: Item[]): CharacterBuilder {
             this.items = items;
             return this;
         }
 
-        setSelectedItem(selectedItem: AItem): CharacterBuilder {
+        setSelectedItem(selectedItem: Item): CharacterBuilder {
             this.selectedItem = selectedItem;
             return this;
         }
@@ -315,7 +315,7 @@ export class Character implements ILeveled, IPrototype, IJson {
             return this;
         }
 
-        addItem(item: AItem): CharacterBuilder {
+        addItem(item: Item): CharacterBuilder {
             this.items.push(item);
             return this;
         }

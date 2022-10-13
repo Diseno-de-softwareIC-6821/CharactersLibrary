@@ -1,4 +1,4 @@
-import { ILeveled } from "../Interfaces/iLeveled";
+import { ILeveled } from "../Interfaces/ILeveled";
 import { IPrototype } from "../Interfaces/iPrototype";
 
 
@@ -55,7 +55,7 @@ export class Item implements ILeveled, IPrototype {
 
 
     // Declarations in order to be able to use the methods in Character class before they are implemented
-    clone(): IPrototype{
+    clone(): Item{
         return new Item(this.name, 
             this.type, this.level,
             this.scope,
@@ -67,7 +67,7 @@ export class Item implements ILeveled, IPrototype {
             this.textureMap, 
             this.currentTexture);
     }
-    deepClone(): IPrototype{
+    deepClone(): Item{
         const textureMap = new Map<number, string>();
         this.textureMap.forEach((value, key) => {
             textureMap.set(key, value);
