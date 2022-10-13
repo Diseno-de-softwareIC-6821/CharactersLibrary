@@ -70,7 +70,12 @@ public class Board {
     public int getActualY(){
         return this.fighter.getPosY();
     }
+    public boolean isNextMoveValid(){
+  
+        
+    }
     public void beforeMove(){
+        
         Square actualSquare = this.getSquare(this.getActualX(), this.getActualY());
         actualSquare.changeState();
     }

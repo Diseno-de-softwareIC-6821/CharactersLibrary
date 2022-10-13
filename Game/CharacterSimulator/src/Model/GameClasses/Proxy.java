@@ -8,6 +8,7 @@ import Control.Board;
 import Model.CharactersLibrary.Classes.Fighter;
 import Model.CharactersLibrary.Intefaces.IAction;
 import Model.CharactersLibrary.Intefaces.ILeveled;
+import Vista.GameScreen;
 /**
  *
  * @author Esteb
@@ -16,10 +17,16 @@ public class Proxy implements IAction,ILeveled{
 
     private Board board; 
     private Fighter fighter; 
-    
+    private GameScreen screen; 
     public Proxy() {
         
     }
+
+    public void setScreen(GameScreen screen) {
+        this.screen = screen;
+    }
+    
+    
     
     public Board getBoard() {
         return board;
@@ -76,7 +83,8 @@ public class Proxy implements IAction,ILeveled{
 
     @Override
     public void levelUp() {
-        
+        fighter.levelUp();
+       
     }
 
     @Override
