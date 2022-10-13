@@ -1,0 +1,24 @@
+[
+    {
+        "name": "Barbaro",
+        "housingSpace": 1,
+        "spawnLevel": 1,
+        "health": 10,
+        "speed": 10,
+        "dps": 10,
+        "cost": 10,
+        "items": [],
+        "appearance": {}
+    },
+    {
+        "name": "Arquera",
+        "housingSpace": 1,
+        "spawnLevel": 1,
+        "health": 6,
+        "speed": 14,
+        "dps": 12,
+        "cost": 12,
+        "items": [],
+        "appearance": {}
+    }
+]
