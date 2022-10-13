@@ -17,6 +17,7 @@ public class GameScreen extends javax.swing.JFrame {
      * Creates new form GameScreen
      */
     Board board;
+    
     public GameScreen(int size) {
         initComponents();
         board = new Board(size);
