@@ -32,12 +32,11 @@ public class Character implements  ILeveled{
     
     @Override
     public void levelUp() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.level+=1;
     }
-
     @Override
     public void levelDown() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.level-=1;
     }
     
     
