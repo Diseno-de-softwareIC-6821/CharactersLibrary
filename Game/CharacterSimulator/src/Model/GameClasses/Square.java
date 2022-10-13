@@ -18,6 +18,7 @@ public class Square {
     private JPanel panel; 
     private boolean isOcupated;
     private Container container;
+    private Character character;
     
      
 
@@ -27,6 +28,7 @@ public class Square {
         this.panel = panel;
         this.isOcupated = isOcupated;
         this.container = container.VOID;
+        this.character;
     }
     public void change(){
         this.isOcupated = !this.isOcupated;

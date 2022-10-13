@@ -4,6 +4,7 @@
  */
 package Control;
 
+import Model.CharactersLibrary.Intefaces.IAction;
 import Model.GameClasses.Square;
 import java.awt.Color;
 import java.awt.Label;
@@ -19,7 +20,7 @@ import javax.swing.border.Border;
  */
 
 
-public class Board  {
+public class Board  implements IAction{
            
     private Square[][] squares;
     private int size; 

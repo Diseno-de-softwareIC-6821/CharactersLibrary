@@ -11,15 +11,25 @@ import Model.CharactersLibrary.Intefaces.ILeveled;
  * @author Esteb
  */
 public class Item implements ILeveled{
-
+    private String name;
+    
+    private int level;
+    private int scope;
+    private double duration;
+    private double damage;
+    private int exploRange;
+    //private weaponType :eWeapon,
+    private int ammo;
+    //private textureMap: Map<number, string>, 
+    //private currentTexture: string,
     @Override
     public void levelUp() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.level+=1;
     }
 
     @Override
     public void levelDown() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.level-=1;
     }
     
 }
