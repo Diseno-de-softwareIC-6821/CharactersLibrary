@@ -1,5 +1,5 @@
 import { ILeveled } from "../Interfaces/ILeveled";
-import { AItem } from "./itemClass";
+import { AItem } from "./Item";
 
 export class Character implements ILeveled {
     

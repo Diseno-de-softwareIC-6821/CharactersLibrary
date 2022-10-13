@@ -1,5 +1,5 @@
 import { IFactory } from "../Interfaces/IFactory";
-import { AItem } from "./itemClass";
+import { AItem } from "./Item";
 
 class ItemFactory implements IFactory{
 
