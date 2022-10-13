@@ -21,6 +21,8 @@ public class MainScreen extends javax.swing.JFrame {
         initComponents();
         SpinnerModel smodel = new SpinnerNumberModel(2, 2, 20, 1);
         this.squaresSizeSpinner.setModel(smodel);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**
@@ -172,6 +174,7 @@ public class MainScreen extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         GameScreen newGame = new GameScreen((int) squaresSizeSpinner.getValue());
         newGame.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

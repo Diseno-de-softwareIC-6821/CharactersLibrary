@@ -18,6 +18,7 @@ public class Square {
     private JPanel panel; 
     private boolean isOcupated;
     private Container container;
+    
      
 
     public Square(int x, int j, JPanel panel, boolean isOcupated) {
