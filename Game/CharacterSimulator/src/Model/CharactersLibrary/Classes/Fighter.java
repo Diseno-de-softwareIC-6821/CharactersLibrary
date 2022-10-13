@@ -16,24 +16,25 @@ import java.util.HashMap;
  */
 public class Fighter implements  ILeveled,IAction {
     // public HashMap<int, String> textures;
-    public String currentTexture;
-    public ArrayList<Item>  items;
-    public Item selectedItem;
-    public String name; 
-    public int level; 
-    public double experience;
-    public double health;
-    public double defense;
-    public double speed; 
-    public double dps;
-    public int spawnLevel;
-    public int housingSpace;
-    public int posX;
-    public int posY;
+    private String currentTexture;
+    private ArrayList<Item>  items;
+    private Item selectedItem;
+    private String name; 
+    private int level; 
+    private double experience;
+    private double health;
+    private double defense;
+    private double speed; 
+    private double dps;
+    private int spawnLevel;
+    private int housingSpace;
+    private int posX;
+    private int posY;
 
     public Fighter() {
         
     }
+    
 
     public Fighter(String currentTexture, ArrayList<Item> items, Item selectedItem, String name, int level, double experience, double health, double defense, double speed, double dps, int spawnLevel, int housingSpace, int posX, int posY) {
         this.currentTexture = currentTexture;
@@ -81,6 +82,62 @@ public class Fighter implements  ILeveled,IAction {
     @Override
     public void moveRight() {
         this.posX+=1;
+    }
+
+    public String getCurrentTexture() {
+        return currentTexture;
+    }
+
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
+    public Item getSelectedItem() {
+        return selectedItem;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public double getExperience() {
+        return experience;
+    }
+
+    public double getHealth() {
+        return health;
+    }
+
+    public double getDefense() {
+        return defense;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public double getDps() {
+        return dps;
+    }
+
+    public int getSpawnLevel() {
+        return spawnLevel;
+    }
+
+    public int getHousingSpace() {
+        return housingSpace;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
     }
 
     

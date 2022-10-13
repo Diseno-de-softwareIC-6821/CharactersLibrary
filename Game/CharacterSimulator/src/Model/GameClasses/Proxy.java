@@ -43,26 +43,33 @@ public class Proxy implements IAction,ILeveled{
     @Override
     public void moveUp() {
         //implements the move up in the interface
+        this.board.beforeMove();
         fighter.moveUp();
+        this.board.moveFighter();
     }
 
     @Override
     public void moveDown() {
         //
+        this.board.beforeMove();
         fighter.moveDown();
-            
+        this.board.moveFighter();
     }
 
     @Override
     public void moveLeft() {
-        //implements move left implementations
+ 
+        this.board.beforeMove();
+
         fighter.moveLeft();
+        this.board.moveFighter();
     }
 
     @Override
     public void moveRight() {
-
+        this.board.beforeMove();
         fighter.moveRight();
+        this.board.moveFighter();
     }
 
 

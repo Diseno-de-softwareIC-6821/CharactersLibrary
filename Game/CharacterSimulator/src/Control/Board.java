@@ -4,6 +4,7 @@
  */
 package Control;
 
+import Model.CharactersLibrary.Classes.Fighter;
 import Model.CharactersLibrary.Intefaces.IAction;
 import Model.GameClasses.Square;
 import java.awt.Color;
@@ -20,14 +21,20 @@ import javax.swing.border.Border;
  */
 
 
-public class Board  implements IAction{
+public class Board {
            
     private Square[][] squares;
     private int size; 
-    public Board(int size) {
+    private Fighter fighter; 
+    
+    public Board(int size, Fighter fighter) {
         this.squares = new Square[size][size];
         this.size = size;
+        this.fighter = fighter;
         generateSquares();
+    }
+    private void setFighter(Fighter oneFighter){
+        this.fighter = oneFighter;
     }
 
     public Square[][] getBoard() {
@@ -57,29 +64,30 @@ public class Board  implements IAction{
     public int getSize() {
         return size;
     }
+    public int getActualX(){
+        return this.fighter.getPosX();
+    }
+    public int getActualY(){
+        return this.fighter.getPosY();
+    }
+    public void beforeMove(){
+        Square actualSquare = this.getSquare(this.getActualX(), this.getActualY());
+        actualSquare.changeState();
+    }
 
     //movement implementations 
-    @Override
-    public void moveUp() {
+    
+    public void moveFighter(){
         
+        int x = this.fighter.getPosX();
+        int y = this.fighter.getPosY();
         
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Square nextSquare = this.getSquare(x, y);
+        nextSquare.setImage(this.fighter.getCurrentTexture());
+        nextSquare.changeState(); 
     }
 
-    @Override
-    public void moveDown() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void moveLeft() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void moveRight() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 
 
     

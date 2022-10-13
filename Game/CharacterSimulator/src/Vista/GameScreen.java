@@ -5,6 +5,7 @@
 package Vista;
 
 import Control.Board;
+import Model.CharactersLibrary.Classes.Fighter;
 import Model.GameClasses.Square;
 
 /**
@@ -18,9 +19,9 @@ public class GameScreen extends javax.swing.JFrame {
      */
     Board board;
     
-    public GameScreen(int size) {
+    public GameScreen(int size, Fighter userFighter) {
         initComponents();
-        board = new Board(size);
+        board = new Board(size, userFighter);
         this.addBoard();
         this.jTextFieldCharacterLevel.setEditable(false);
         this.setLocationRelativeTo(null);
