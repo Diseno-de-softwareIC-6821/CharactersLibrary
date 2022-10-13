@@ -14,7 +14,7 @@ import java.util.HashMap;
  *
  * @author Esteb
  */
-public class Character implements  ILeveled,IAction {
+public class Fighter implements  ILeveled,IAction {
     // public HashMap<int, String> textures;
     public String currentTexture;
     public ArrayList<Item>  items;
@@ -31,10 +31,11 @@ public class Character implements  ILeveled,IAction {
     public int posX;
     public int posY;
 
-    public Character() {
+    public Fighter() {
+        
     }
 
-    public Character(String currentTexture, ArrayList<Item> items, Item selectedItem, String name, int level, double experience, double health, double defense, double speed, double dps, int spawnLevel, int housingSpace, int posX, int posY) {
+    public Fighter(String currentTexture, ArrayList<Item> items, Item selectedItem, String name, int level, double experience, double health, double defense, double speed, double dps, int spawnLevel, int housingSpace, int posX, int posY) {
         this.currentTexture = currentTexture;
         this.items = items;
         this.selectedItem = selectedItem;
