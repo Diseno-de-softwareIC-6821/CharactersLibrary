@@ -4,13 +4,13 @@
  */
 package Control;
 
-import Model.Square;
+import Model.GameClasses.Square;
 import java.awt.Color;
 import java.awt.Label;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import Model.Configuration;
+import Model.GameClasses.Configuration;
 import javax.swing.border.Border;
 
 /**
@@ -51,6 +51,7 @@ public class Board  {
             }
         }
     }
+    
 
     public int getSize() {
         return size;

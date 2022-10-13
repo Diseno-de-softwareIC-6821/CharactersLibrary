@@ -5,7 +5,7 @@
 package Vista;
 
 import Control.Board;
-import Model.Square;
+import Model.GameClasses.Square;
 
 /**
  *
