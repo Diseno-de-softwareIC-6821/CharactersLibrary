@@ -5,7 +5,7 @@
         "spawnLevel": 1,
         "health": 10,
         "speed": 10,
-        "dps": 10,
+        "dps": 8,
         "cost": 10,
         "items": [],
         "appearance": {}
@@ -14,10 +14,32 @@
         "name": "Arquera",
         "housingSpace": 1,
         "spawnLevel": 1,
-        "health": 6,
+        "health": 10,
         "speed": 14,
-        "dps": 12,
+        "dps": 10,
         "cost": 12,
+        "items": [],
+        "appearance": {}
+    },
+    {
+        "name": "PEKKA",
+        "housingSpace": 1,
+        "spawnLevel": 4,
+        "health": 30,
+        "speed": 8,
+        "dps": 16,
+        "cost": 20,
+        "items": [],
+        "appearance": {}
+    },
+    {
+        "name": "Minion",
+        "housingSpace": 1,
+        "spawnLevel": 3,
+        "health": 5,
+        "speed": 20,
+        "dps": 8,
+        "cost": 3,
         "items": [],
         "appearance": {}
     }
