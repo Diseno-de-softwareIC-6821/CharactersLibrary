@@ -1,15 +1,60 @@
 [
+
     {
-        "name": "Barbaro",
-        "housingSpace": 1,
-        "spawnLevel": 1,
-        "health": 10,
-        "speed": 10,
-        "dps": 8,
-        "cost": 10,
-        "items": [],
-        "appearance": {}
+    "textureMap": {
+        "0": "texture1",
+        "1": "texture2"
     },
+    "currentTexture": "texture1",
+    "items": [
+        {
+        "name": "Sword",
+        "type": 0,
+        "level": 10,
+        "scope": 10,
+        "duration": 10,
+        "damage": 10,
+        "exploRange": 10,
+        "weaponType": 0,
+        "ammo": 10,
+        "textureMap": {
+            "0": "texture1",
+            "1": "texture2"
+        },
+        "currentTexture": "texture1"
+        },
+        {
+        "name": "Sword",
+        "type": 0,
+        "level": 10,
+        "scope": 10,
+        "duration": 10,
+        "damage": 10,
+        "exploRange": 10,
+        "weaponType": 0,
+        "ammo": 10,
+        "textureMap": {
+            "0": "texture1",
+            "1": "texture2"
+        },
+        "currentTexture": "texture1"
+        }
+    ],
+    "name": "test",
+    "level": 1,
+    "experience": 0,
+    "health": 100,
+    "damage": 10,
+    "defense": 10,
+    "speed": 10,
+    "dps": 0,
+    "cost": 10,
+    "spawnLevel": 0,
+    "housingSpace": 10,
+    "posX": 0,
+    "posY": 0
+    },
+
     {
         "name": "Arquera",
         "housingSpace": 1,

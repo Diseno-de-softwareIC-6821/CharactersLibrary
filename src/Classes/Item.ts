@@ -1,26 +1,47 @@
 import { ILeveled } from "../Interfaces/ILeveled";
 import { IPrototype } from "../Interfaces/iPrototype";
 
+import { EType } from "../Enums/EType";
+import { eWeapon } from "../Enums/EWeapon";
 
 export class Item implements ILeveled, IPrototype {
 
+    name:string
+    type:EType 
+    level:number 
+    scope:number
+    duration:number 
+    damage :number
+    exploRange :number
+    weaponType :eWeapon
+    ammo :number
+    textureMap: Map<number, string>
+    currentTexture: string
+
     constructor(
-        private name:string,
-        private type:EType ,
-        private level:number, 
-        private scope:number,
-        private duration:number, 
-        private damage :number,
-        private exploRange :number,
-        private weaponType :eWeapon,
-        private ammo :number,
-        private textureMap: Map<number, string>, 
-        private currentTexture: string,
+        name:string,
+        type:EType ,
+        level:number, 
+        scope:number,
+        duration:number, 
+        damage :number,
+        exploRange :number,
+        weaponType :eWeapon,
+        ammo :number,
+        textureMap: Map<number, string>, 
+        currentTexture: string,
         ){
         this.name = name;
         this.type = type;
         this.level = level;
         this.scope = scope;
+        this.duration = duration;
+        this.damage = damage;
+        this.exploRange = exploRange;
+        this.weaponType = weaponType;
+        this.ammo = ammo;
+        this.textureMap = textureMap;
+        this.currentTexture = currentTexture;
     }
 
     getName():string{
@@ -38,6 +59,9 @@ export class Item implements ILeveled, IPrototype {
     getDamage():number{
         return this.damage;
     }
+    getTextureMap(): Map<number, string>{
+        return this.textureMap;
+    }
     //
    
     
@@ -52,6 +76,31 @@ export class Item implements ILeveled, IPrototype {
         this.level -=1;
     }
  
+
+    toJson(): string {
+
+        const textureMapObject: any = {};
+        this.textureMap.forEach((value, key) => {
+            textureMapObject[key] = value;
+        });
+
+        let objectJson: any =  {
+            name: this.name,
+            type: this.type,
+            level: this.level,
+            scope: this.scope,
+            duration: this.duration,
+            damage: this.damage,
+            exploRange: this.exploRange,
+            weaponType: this.weaponType,
+            ammo: this.ammo,
+            textureMap: textureMapObject,
+            currentTexture: this.currentTexture
+        }
+
+        return JSON.stringify(objectJson);
+
+    }
 
 
     // Declarations in order to be able to use the methods in Character class before they are implemented

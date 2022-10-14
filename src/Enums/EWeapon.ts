@@ -1,4 +1,4 @@
-const enum eWeapon{
+export const enum eWeapon{
     NO_WEAPON = 0, //character without weapon
     EXPLOSIVE = 1, //explosive weapon
     MELEE = 2, //Close range melee weapon

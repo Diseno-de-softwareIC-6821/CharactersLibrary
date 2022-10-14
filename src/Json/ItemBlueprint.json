@@ -1,0 +1,16 @@
+{
+    "name": "Sword",
+    "type": 0,
+    "level": 10,
+    "scope": 10,
+    "duration": 10,
+    "damage": 10,
+    "exploRange": 10,
+    "weaponType": 0,
+    "ammo": 10,
+    "textureMap": {
+      "0": "texture1",
+      "1": "texture2"
+    },
+    "currentTexture": "texture1"
+  }

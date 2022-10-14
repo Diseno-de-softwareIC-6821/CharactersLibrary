@@ -1,5 +1,5 @@
 
-enum eSkill{
+export const enum eSkill{
     NO_SKILL = 0, //character without skill
     STRONGER = 1, //get more damage points
     FASTER = 2, //increase the speed of the player
