@@ -46,7 +46,7 @@ public class GameControl extends Thread implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+           System.out.println("Key Typed");
     }
 
     @Override
@@ -56,18 +56,22 @@ public class GameControl extends Thread implements KeyListener {
             case KeyEvent.VK_W:
                 proxy.moveUp();
                 //up
+                System.out.println("Moving up");
                 break;
             case KeyEvent.VK_D:
                 proxy.moveRight();
                 //right
+                System.out.println("Moving Right");
                 break;
             case KeyEvent.VK_A:
                 proxy.moveLeft();
                 //left
+                System.out.println("Moving left");
                 break;
             case KeyEvent.VK_S:
                 proxy.moveDown();
                 //down
+                System.out.println("Moving down");
                 break;
             default:
                 System.out.println("Another key have been pressed");
@@ -84,7 +88,7 @@ public class GameControl extends Thread implements KeyListener {
     
     @Override
     public void keyReleased(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            System.out.println("KeyRelease");
     }
     
     

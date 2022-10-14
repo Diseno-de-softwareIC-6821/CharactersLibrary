@@ -13,4 +13,6 @@ public class CLTest {
         for (int i = 0; i < loadedCharacters.size();i++)
             System.out.println(loadedCharacters.get(i).toString());
     }
+
 }
+

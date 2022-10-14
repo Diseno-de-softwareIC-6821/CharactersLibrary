@@ -57,11 +57,11 @@ public class Item implements ILeveled{
     }
 
     public int getLevel() {
-        return level;
+        return (int)level;
     }
 
     public int getScope() {
-        return scope;
+        return (int) scope;
     }
 
     public double getDuration() {
@@ -73,11 +73,11 @@ public class Item implements ILeveled{
     }
 
     public int getExploRange() {
-        return exploRange;
+        return (int)exploRange;
     }
 
     public int getAmmo() {
-        return ammo;
+        return (int) ammo;
     }
 
     public String getCurrentTexture() {
@@ -100,4 +100,5 @@ public class Item implements ILeveled{
                 ", currentTexture='" + currentTexture + '\'' +
                 '}';
     }
+
 }
