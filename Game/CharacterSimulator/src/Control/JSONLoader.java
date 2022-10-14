@@ -3,7 +3,7 @@ package Control;
 import java.io.FileReader;
 import java.util.ArrayList;
 
-import Model.CharactersLibrary.Classes.CharacterGame;
+import Model.CharactersLibrary.Classes.Fighter;
 import Model.CharactersLibrary.Classes.Item;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -11,8 +11,8 @@ import org.json.simple.parser.*;
 
 public class JSONLoader {
 
-    static private CharacterGame CharacterConstructor(JSONObject characterJSON){
-        return new CharacterGame(
+    static private Fighter CharacterConstructor(JSONObject characterJSON){
+        return new Fighter(
             null, //characterJSON.get("currentTexture"),
             null, //characterJSON.get("items"),
             null, //characterJSON.get("selectedItem"),
@@ -33,14 +33,14 @@ public class JSONLoader {
         return new Item();
     }
 
-    static public ArrayList<CharacterGame> CharacterParser() throws Exception{
+    static public ArrayList<Fighter> CharacterParser() throws Exception{
 
         //READS JSON
         Object jsonFileRead = new JSONParser().parse(new FileReader("CharacterBlueprints.json"));
         // TYPECASTING TO JSONARRAY
         JSONArray jsonCharArray = (JSONArray) jsonFileRead;
 
-        ArrayList<CharacterGame> loadedCharacters = new ArrayList<>();
+        ArrayList<Fighter> loadedCharacters = new ArrayList<>();
         //INSTANCE OF CHARACTERS IN ARRAYLIST
         for (int i = 0; i < jsonCharArray.size(); i++){
             loadedCharacters.add(CharacterConstructor((JSONObject) jsonCharArray.get(i)));
