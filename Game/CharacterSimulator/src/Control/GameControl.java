@@ -4,6 +4,7 @@
  */
 package Control;
 
+import Model.CharactersLibrary.Classes.Fighter;
 import Model.GameClasses.Proxy;
 import Vista.GameScreen;
 import java.awt.event.KeyEvent;
@@ -18,8 +19,14 @@ public class GameControl implements KeyListener{
     GameScreen screen;
     Proxy proxy;
 
-    public GameControl() {
-        
+    public GameControl(int size, Fighter fighter, GameScreen screen) {
+        this.board = new Board(size, fighter);
+        this.proxy = new Proxy();
+        this.proxy.setBoard(board);
+        this.proxy.setFighter(fighter);
+        this.screen = screen;
+        this.screen.addBoard(board);
+              
     }
 
     @Override
@@ -52,9 +59,14 @@ public class GameControl implements KeyListener{
 
                 
         }
+        e.consume(); //important beacause this event can throw weird things
       
     }
 
+    public Board getBoard() {
+        return board;
+    }
+    
     @Override
     public void keyReleased(KeyEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

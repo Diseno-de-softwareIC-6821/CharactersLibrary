@@ -5,6 +5,7 @@
 package Vista;
 
 import Control.Board;
+import Control.GameControl;
 import Model.CharactersLibrary.Classes.Fighter;
 import Model.GameClasses.Square;
 
@@ -17,18 +18,19 @@ public class GameScreen extends javax.swing.JFrame {
     /**
      * Creates new form GameScreen
      */
-    Board board;
     
+    GameControl admGame;
     public GameScreen(int size, Fighter userFighter) {
         initComponents();
-        board = new Board(size, userFighter);
-        this.addBoard();
+        admGame = new GameControl(size, userFighter, this );
+ 
         this.jTextFieldCharacterLevel.setEditable(false);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
     
-    public void addBoard(){
+    public void addBoard(Board board){
+        
         Square[][] squares = board.getBoard();
         for(int i = 0; i < board.getSize(); i++){
             for(int j = 0; j < board.getSize(); j++){

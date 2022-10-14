@@ -18,14 +18,11 @@ public class Proxy implements IAction,ILeveled{
 
     private Board board; 
     private Fighter fighter; 
-    private GameScreen screen; 
     public Proxy() {
         
     }
 
-    public void setScreen(GameScreen screen) {
-        this.screen = screen;
-    }
+    
     
     
     
