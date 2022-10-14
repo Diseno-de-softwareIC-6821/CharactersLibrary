@@ -5,6 +5,10 @@
 package Model.CharactersLibrary.Classes;
 
 import Model.CharactersLibrary.Intefaces.ILeveled;
+
+import Model.CharactersLibrary.Intefaces.IAction;
+
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,7 +16,8 @@ import java.util.HashMap;
  *
  * @author Esteb
  */
-public class Fighter implements  ILeveled{
+
+public class Fighter implements  ILeveled, IAction{
     public HashMap<Integer, String> textures;
     public String currentTexture;
     public ArrayList<Item>  items;
@@ -46,15 +51,92 @@ public class Fighter implements  ILeveled{
         this.posX = posX;
         this.posY = posY;
     }
-
+    
+    
+    
     @Override
     public void levelUp() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.level+=1;
+    }
+    @Override
+    public void levelDown() {
+        this.level-=1;
     }
 
     @Override
-    public void levelDown() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void moveUp() {
+        this.posY+=1;
+    }
+
+    @Override
+    public void moveDown() {
+        this.posY-=1;
+    }
+
+    @Override
+    public void moveLeft() {
+        this.posX-=1;
+    }
+
+    @Override
+    public void moveRight() {
+        this.posX+=1;
+    }
+
+    public String getCurrentTexture() {
+        return currentTexture;
+    }
+
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
+    public Item getSelectedItem() {
+        return selectedItem;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public double getExperience() {
+        return experience;
+    }
+
+    public double getHealth() {
+        return health;
+    }
+
+    public double getDefense() {
+        return defense;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public double getDps() {
+        return dps;
+    }
+
+    public int getSpawnLevel() {
+        return spawnLevel;
+    }
+
+    public int getHousingSpace() {
+        return housingSpace;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
     }
 
     @Override
@@ -77,4 +159,5 @@ public class Fighter implements  ILeveled{
                 ", posY=" + posY +
                 '}';
     }
+
 }

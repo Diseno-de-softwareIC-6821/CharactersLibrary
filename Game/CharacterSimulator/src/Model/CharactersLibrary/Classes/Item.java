@@ -15,7 +15,6 @@ import java.util.HashMap;
  * @author Esteb
  */
 public class Item implements ILeveled{
-
     public String name;
     public EType type;
     public double level;
@@ -42,14 +41,47 @@ public class Item implements ILeveled{
         this.currentTexture = currentTexture;
     }
 
+
     @Override
     public void levelUp() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.level+=1;
     }
 
     @Override
     public void levelDown() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.level-=1;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public int getScope() {
+        return scope;
+    }
+
+    public double getDuration() {
+        return duration;
+    }
+
+    public double getDamage() {
+        return damage;
+    }
+
+    public int getExploRange() {
+        return exploRange;
+    }
+
+    public int getAmmo() {
+        return ammo;
+    }
+
+    public String getCurrentTexture() {
+        return currentTexture;
     }
 
     @Override

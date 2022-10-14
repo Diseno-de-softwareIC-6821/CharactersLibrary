@@ -5,6 +5,10 @@
 package Model.GameClasses;
 
 import java.awt.Color;
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -18,6 +22,12 @@ public class Square {
     private JPanel panel; 
     private boolean isOcupated;
     private Container container;
+    private JLabel labelImage; 
+    
+    
+    
+
+    
     
      
 
@@ -27,9 +37,30 @@ public class Square {
         this.panel = panel;
         this.isOcupated = isOcupated;
         this.container = container.VOID;
+        labelImage = new JLabel();
+        labelImage.setSize(panel.getWidth()/2, panel.getHeight()/2);
+       
     }
-    public void change(){
+    public void setImage(String route){
+        
+        ImageIcon image = new ImageIcon(route);
+        Icon icon = new ImageIcon(image.getImage().getScaledInstance(
+                                    labelImage.getWidth(), 
+                                    labelImage.getHeight(), 
+                                    Image.SCALE_DEFAULT));
+        labelImage.setIcon(icon);
+        this.panel.add(labelImage);
+        this.panel.repaint();
+    }
+    
+  
+    
+    public void changeState(){
+        if(this.isOcupated){ //if is ocupated and this function is used is because the fighter gonna move
+            this.panel.remove(labelImage); // remove the image, the character is in another panel
+        }
         this.isOcupated = !this.isOcupated;
+        
     }
     public void setItem(){
         this.container = Container.ITEM;
@@ -68,7 +99,7 @@ public class Square {
         this.panel = label;
     }
 
-    public boolean isIsOcupated() {
+    public boolean isOcupated() {
         return isOcupated;
     }
 
