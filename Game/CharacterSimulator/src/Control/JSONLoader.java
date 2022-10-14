@@ -78,7 +78,7 @@ public class JSONLoader {
                 (String) itemJSON.get("currentTexture"));
     }
 
-    static private ArrayList<Item> ItemParser(JSONArray itemArrayJSON){
+    static public ArrayList<Item> ItemParser(JSONArray itemArrayJSON){
 
         ArrayList<Item> loadedCharItems= new ArrayList<>();
         //INSTANCE OF CHARACTERS IN ARRAYLIST
