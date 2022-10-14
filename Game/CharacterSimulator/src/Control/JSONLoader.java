@@ -11,6 +11,7 @@ import Model.Enums.EWeapon;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
+import Model.GameClasses.Configuration;
 
 public class JSONLoader {
 
@@ -113,7 +114,7 @@ public class JSONLoader {
     static public ArrayList<Fighter> CharacterParser() throws Exception{
 
         //READS JSON
-        Object jsonFileRead = new JSONParser().parse(new FileReader("CharacterBlueprints.json"));
+        Object jsonFileRead = new JSONParser().parse(new FileReader(Configuration.JSON_ROUTE));
         // TYPECASTING TO JSONARRAY
         JSONArray jsonCharArray = (JSONArray) jsonFileRead;
 
