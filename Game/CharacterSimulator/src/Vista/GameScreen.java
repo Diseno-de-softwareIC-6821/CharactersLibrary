@@ -7,8 +7,11 @@ package Vista;
 import Control.Board;
 import Control.GameControl;
 import Model.CharactersLibrary.Classes.Fighter;
+import Model.GameClasses.Configuration;
 import Model.GameClasses.Square;
 import java.awt.Image;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -444,7 +447,12 @@ public class GameScreen extends javax.swing.JFrame {
 
     private void jbuttonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonSalirActionPerformed
         this.admGame.stopGame = true;
-        MainScreen ventana = new MainScreen();
+        MainScreen ventana = null;
+        try {
+            ventana = new MainScreen();
+        } catch (Exception ex) {
+            Logger.getLogger(GameScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ventana.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jbuttonSalirActionPerformed
@@ -488,7 +496,7 @@ public class GameScreen extends javax.swing.JFrame {
         this.repaint();
     }
     private void paintImage(JPanel panel, String route, JLabel label){
-        label.setSize(panel.getWidth()/2, panel.getHeight()/2);
+        label.setSize(panel.getWidth()/Configuration.IMAGE_SIZE_SETTING, panel.getHeight()/Configuration.IMAGE_SIZE_SETTING);
         ImageIcon image = new ImageIcon(route);
         Icon icon = new ImageIcon(image.getImage().getScaledInstance(
                                     label.getWidth(), 

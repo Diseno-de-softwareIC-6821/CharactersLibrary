@@ -15,7 +15,7 @@ import Model.GameClasses.Configuration;
 
 public class JSONLoader {
 
-    static private HashMap<Integer,String> textureMapLoader(JSONObject textureJSON){
+     private static HashMap<Integer,String> textureMapLoader(JSONObject textureJSON){
         HashMap<Integer,String> textureMap = new HashMap<>();
         textureMap.put(1, (String) ((JSONObject) textureJSON.get("textureMap")).get("1"));
         textureMap.put(3, (String) ((JSONObject) textureJSON.get("textureMap")).get("3"));
@@ -24,7 +24,7 @@ public class JSONLoader {
         return textureMap;
     }
 
-    static private EType eTypeSelecter(Integer type){
+     private static EType eTypeSelecter(Integer type){
         switch (type){
             case 0: {
                 return EType.HEALING;
@@ -44,7 +44,7 @@ public class JSONLoader {
         }
     }
 
-    static private EWeapon eWeaponSelecter(Integer type){
+     private static EWeapon eWeaponSelecter(Integer type){
         switch (type){
             case 0: {
                 return EWeapon.NO_WEAPON;
@@ -64,7 +64,7 @@ public class JSONLoader {
         }
     }
 
-    static private Item ItemConstructor(JSONObject itemJSON){
+     private static Item ItemConstructor(JSONObject itemJSON){
 
         return new Item((String) itemJSON.get("name"),
                 eTypeSelecter(((Long) itemJSON.get("type")).intValue()),
@@ -79,7 +79,7 @@ public class JSONLoader {
                 (String) itemJSON.get("currentTexture"));
     }
 
-    static public ArrayList<Item> ItemParser(JSONArray itemArrayJSON){
+     public static ArrayList<Item> ItemParser(JSONArray itemArrayJSON){
 
         ArrayList<Item> loadedCharItems= new ArrayList<>();
         //INSTANCE OF CHARACTERS IN ARRAYLIST
@@ -89,7 +89,7 @@ public class JSONLoader {
         return loadedCharItems;
     }
 
-    static private Fighter CharacterConstructor(JSONObject characterJSON){
+     private static Fighter CharacterConstructor(JSONObject characterJSON){
 
         ArrayList<Item> items = ItemParser((JSONArray) characterJSON.get("items"));
 
@@ -111,7 +111,7 @@ public class JSONLoader {
             ((Long) characterJSON.get("posY")).intValue());
     }
 
-    static public ArrayList<Fighter> CharacterParser() throws Exception{
+    public static ArrayList<Fighter> CharacterParser() throws Exception{
 
         //READS JSON
         Object jsonFileRead = new JSONParser().parse(new FileReader(Configuration.JSON_ROUTE));

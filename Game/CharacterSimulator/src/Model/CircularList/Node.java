@@ -37,7 +37,7 @@ public class Node {
         this.back = back;
     }
 
-    public ILeveled getFighter() {
+    public ILeveled getIleveled() {
         return fighterOrItem;
     }
     
