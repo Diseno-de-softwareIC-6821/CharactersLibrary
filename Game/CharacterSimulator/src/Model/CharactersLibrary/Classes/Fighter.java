@@ -5,38 +5,37 @@
 package Model.CharactersLibrary.Classes;
 
 import Model.CharactersLibrary.Intefaces.ILeveled;
+
 import Model.CharactersLibrary.Intefaces.IAction;
 
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 /**
  *
  * @author Esteb
  */
-public class Fighter implements  ILeveled,IAction {
-    // public HashMap<int, String> textures;
-    private String currentTexture;
-    private ArrayList<Item>  items;
-    private Item selectedItem;
-    private String name; 
-    private int level; 
-    private double experience;
-    private double health;
-    private double defense;
-    private double speed; 
-    private double dps;
-    private int spawnLevel;
-    private int housingSpace;
-    private int posX;
-    private int posY;
 
-    public Fighter() {
-        
-    }
-    
+public class Fighter implements  ILeveled, IAction{
+    public HashMap<Integer, String> textures;
+    public String currentTexture;
+    public ArrayList<Item>  items;
+    public Item selectedItem;
+    public String name; 
+    public int level; 
+    public double experience;
+    public double health;
+    public double defense;
+    public double speed; 
+    public double dps;
+    public int spawnLevel;
+    public int housingSpace;
+    public int posX;
+    public int posY;
 
-    public Fighter(String currentTexture, ArrayList<Item> items, Item selectedItem, String name, int level, double experience, double health, double defense, double speed, double dps, int spawnLevel, int housingSpace, int posX, int posY) {
+    public Fighter(HashMap<Integer, String> textures, String currentTexture, ArrayList<Item> items, Item selectedItem, String name, int level, double experience, double health, double defense, double speed, double dps, int spawnLevel, int housingSpace, int posX, int posY) {
+        this.textures = textures;
         this.currentTexture = currentTexture;
         this.items = items;
         this.selectedItem = selectedItem;
@@ -140,6 +139,25 @@ public class Fighter implements  ILeveled,IAction {
         return posY;
     }
 
-    
-    
+    @Override
+    public String toString() {
+        return "Fighter{" +
+                "textures=" + textures +
+                ", currentTexture='" + currentTexture + '\'' +
+                ", items=" + items +
+                ", selectedItem=" + selectedItem +
+                ", name='" + name + '\'' +
+                ", level=" + level +
+                ", experience=" + experience +
+                ", health=" + health +
+                ", defense=" + defense +
+                ", speed=" + speed +
+                ", dps=" + dps +
+                ", spawnLevel=" + spawnLevel +
+                ", housingSpace=" + housingSpace +
+                ", posX=" + posX +
+                ", posY=" + posY +
+                '}';
+    }
+
 }

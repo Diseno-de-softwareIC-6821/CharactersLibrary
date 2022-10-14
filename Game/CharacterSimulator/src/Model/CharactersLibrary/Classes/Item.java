@@ -5,24 +5,43 @@
 package Model.CharactersLibrary.Classes;
 
 import Model.CharactersLibrary.Intefaces.ILeveled;
+import Model.Enums.EType;
+import Model.Enums.EWeapon;
+
+import java.util.HashMap;
 
 /**
  *
  * @author Esteb
  */
 public class Item implements ILeveled{
-    private String name;
-    
-    private int level;
-    private int scope;
-    private double duration;
-    private double damage;
-    private int exploRange;
-    //private weaponType :eWeapon,
-    private int ammo;
-    //private textureMap: Map<number, string>, 
-    private String currentTexture;
-    
+    public String name;
+    public EType type;
+    public double level;
+    public double scope;
+    public double duration;
+    public double damage;
+    public double exploRange;
+    public EWeapon weaponType;
+    public double ammo;
+    public HashMap<Integer,String> textureMap;
+    public String currentTexture;
+
+    public Item(String name, EType type, double level, double scope, double duration, double damage, double exploRange, EWeapon weaponType, double ammo, HashMap<Integer, String> textureMap, String currentTexture) {
+        this.name = name;
+        this.type = type;
+        this.level = level;
+        this.scope = scope;
+        this.duration = duration;
+        this.damage = damage;
+        this.exploRange = exploRange;
+        this.weaponType = weaponType;
+        this.ammo = ammo;
+        this.textureMap = textureMap;
+        this.currentTexture = currentTexture;
+    }
+
+
     @Override
     public void levelUp() {
         this.level+=1;
@@ -64,5 +83,21 @@ public class Item implements ILeveled{
     public String getCurrentTexture() {
         return currentTexture;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "name='" + name + '\'' +
+                ", type=" + type +
+                ", level=" + level +
+                ", scope=" + scope +
+                ", duration=" + duration +
+                ", damage=" + damage +
+                ", exploRange=" + exploRange +
+                ", weaponType=" + weaponType +
+                ", ammo=" + ammo +
+                ", textureMap=" + textureMap +
+                ", currentTexture='" + currentTexture + '\'' +
+                '}';
+    }
 }
