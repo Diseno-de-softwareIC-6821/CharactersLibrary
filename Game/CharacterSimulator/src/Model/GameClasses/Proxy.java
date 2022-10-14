@@ -5,6 +5,7 @@
 package Model.GameClasses;
 
 import Control.Board;
+import Control.EMovements;
 import Model.CharactersLibrary.Classes.Fighter;
 import Model.CharactersLibrary.Intefaces.IAction;
 import Model.CharactersLibrary.Intefaces.ILeveled;
@@ -50,33 +51,42 @@ public class Proxy implements IAction,ILeveled{
     @Override
     public void moveUp() {
         //implements the move up in the interface
-        this.board.beforeMove();
-        fighter.moveUp();
-        this.board.moveFighter();
+        if(this.board.isNextMoveValid(EMovements.MOVE_UP)){
+            this.board.beforeMove();
+            fighter.moveUp();
+            this.board.moveFighter();
+        }
+     
     }
 
     @Override
     public void moveDown() {
         //
-        this.board.beforeMove();
-        fighter.moveDown();
-        this.board.moveFighter();
+        if(this.board.isNextMoveValid(EMovements.MOVE_DOWN)){
+            this.board.beforeMove();
+            fighter.moveDown();
+            this.board.moveFighter();
+        }
+     
     }
 
     @Override
     public void moveLeft() {
- 
-        this.board.beforeMove();
-
-        fighter.moveLeft();
-        this.board.moveFighter();
+        if(this.board.isNextMoveValid(EMovements.MOVE_LEFT)){
+            this.board.beforeMove();
+            fighter.moveLeft();
+            this.board.moveFighter();
+        }
     }
 
     @Override
     public void moveRight() {
-        this.board.beforeMove();
-        fighter.moveRight();
-        this.board.moveFighter();
+        if(this.board.isNextMoveValid(EMovements.MOVE_RIGHT)){
+            this.board.beforeMove();
+            fighter.moveRight();
+            this.board.moveFighter();
+        }
+        
     }
 
 
