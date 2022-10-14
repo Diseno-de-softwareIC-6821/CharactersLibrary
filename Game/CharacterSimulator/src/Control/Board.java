@@ -43,6 +43,11 @@ public class Board {
     public Square getSquare(int i, int j){
         return squares[i][j];
     }
+
+    public Fighter getFighter() {
+        return fighter;
+    }
+    
     
 
     private void generateSquares(){

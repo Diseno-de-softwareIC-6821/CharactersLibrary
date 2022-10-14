@@ -9,15 +9,18 @@ import Model.GameClasses.Proxy;
 import Vista.GameScreen;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Esteb
  */
-public class GameControl implements KeyListener{
+public class GameControl extends Thread implements KeyListener {
     Board board;
     GameScreen screen;
     Proxy proxy;
+    public  volatile boolean stopGame;
 
     public GameControl(int size, Fighter fighter, GameScreen screen) {
         this.board = new Board(size, fighter);
@@ -26,7 +29,19 @@ public class GameControl implements KeyListener{
         this.proxy.setFighter(fighter);
         this.screen = screen;
         this.screen.addBoard(board);
-              
+        stopGame = false;
+        this.start();
+    }
+    @Override
+    public void run(){
+        while(!stopGame){
+            screen.updateInterface();
+            try {
+                sleep(500);
+            } catch (InterruptedException ex) {
+                System.out.println("failed theread");
+            }
+        }
     }
 
     @Override

@@ -21,7 +21,8 @@ public class Item implements ILeveled{
     //private weaponType :eWeapon,
     private int ammo;
     //private textureMap: Map<number, string>, 
-    //private currentTexture: string,
+    private String currentTexture;
+    
     @Override
     public void levelUp() {
         this.level+=1;
@@ -30,6 +31,38 @@ public class Item implements ILeveled{
     @Override
     public void levelDown() {
         this.level-=1;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public int getScope() {
+        return scope;
+    }
+
+    public double getDuration() {
+        return duration;
+    }
+
+    public double getDamage() {
+        return damage;
+    }
+
+    public int getExploRange() {
+        return exploRange;
+    }
+
+    public int getAmmo() {
+        return ammo;
+    }
+
+    public String getCurrentTexture() {
+        return currentTexture;
     }
     
 }

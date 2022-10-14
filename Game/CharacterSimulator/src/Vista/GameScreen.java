@@ -8,6 +8,11 @@ import Control.Board;
 import Control.GameControl;
 import Model.CharactersLibrary.Classes.Fighter;
 import Model.GameClasses.Square;
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -22,7 +27,7 @@ public class GameScreen extends javax.swing.JFrame {
     GameControl admGame;
     public GameScreen(int size, Fighter userFighter) {
         initComponents();
-        admGame = new GameControl(size, userFighter, this );
+        admGame = new GameControl(size, userFighter, this);
  
         this.jTextFieldCharacterLevel.setEditable(false);
         this.setLocationRelativeTo(null);
@@ -57,23 +62,33 @@ public class GameScreen extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabelCharacterTittle = new javax.swing.JLabel();
         jPanelImage = new javax.swing.JPanel();
-        jLabelLevel = new javax.swing.JLabel();
+        jLabelCharacterImage = new javax.swing.JLabel();
         jTextFieldCharacterLevel = new javax.swing.JTextField();
         jProgressBarExperience = new javax.swing.JProgressBar();
         jlabelCharacterEXP = new javax.swing.JLabel();
         jLabelCharacterName = new javax.swing.JLabel();
-        jTextFieldCharacterHealth = new javax.swing.JTextField();
         jLabelCharacterhealth = new javax.swing.JLabel();
         jTextFieldCharacterName = new javax.swing.JTextField();
-        jTextFieldCharacterItem = new javax.swing.JTextField();
-        jLabelCharacterSpeed1 = new javax.swing.JLabel();
         jTextFieldCharacterSpeed = new javax.swing.JTextField();
-        jLabelCharacterSpeed2 = new javax.swing.JLabel();
+        jLabelCharacterSpeed = new javax.swing.JLabel();
+        jProgressBarHealth = new javax.swing.JProgressBar();
+        jLabelHealth = new javax.swing.JLabel();
+        jLabelCharacterLevel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jbuttonSalir = new javax.swing.JButton();
         jLabelGameStadisctics = new javax.swing.JLabel();
         jLabelTimeTittle = new javax.swing.JLabel();
         jLabelClockTime = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabelItemTitle = new javax.swing.JLabel();
+        jLabelItemName = new javax.swing.JLabel();
+        jLabelItemLevel = new javax.swing.JLabel();
+        jTextFieldItemName = new javax.swing.JTextField();
+        jPanelItemImage = new javax.swing.JPanel();
+        jLabelItemImage = new javax.swing.JLabel();
+        jTextFieldItemLevel = new javax.swing.JTextField();
+        jTextFieldItemDamage = new javax.swing.JTextField();
+        jLabelItemDamage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,7 +102,7 @@ public class GameScreen extends javax.swing.JFrame {
         );
         screenBoardLayout.setVerticalGroup(
             screenBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 51));
@@ -102,16 +117,18 @@ public class GameScreen extends javax.swing.JFrame {
         jPanelImage.setLayout(jPanelImageLayout);
         jPanelImageLayout.setHorizontalGroup(
             jPanelImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanelImageLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabelCharacterImage, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanelImageLayout.setVerticalGroup(
             jPanelImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanelImageLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jLabelCharacterImage)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
-
-        jLabelLevel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabelLevel.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelLevel.setText("Level");
 
         jTextFieldCharacterLevel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldCharacterLevel.setFocusable(false);
@@ -130,9 +147,6 @@ public class GameScreen extends javax.swing.JFrame {
         jLabelCharacterName.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCharacterName.setText("Name");
 
-        jTextFieldCharacterHealth.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFieldCharacterHealth.setFocusable(false);
-
         jLabelCharacterhealth.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelCharacterhealth.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCharacterhealth.setText("Health");
@@ -140,91 +154,97 @@ public class GameScreen extends javax.swing.JFrame {
         jTextFieldCharacterName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldCharacterName.setFocusable(false);
 
-        jTextFieldCharacterItem.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFieldCharacterItem.setFocusable(false);
-
-        jLabelCharacterSpeed1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabelCharacterSpeed1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelCharacterSpeed1.setText("Item");
-
         jTextFieldCharacterSpeed.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldCharacterSpeed.setFocusable(false);
 
-        jLabelCharacterSpeed2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabelCharacterSpeed2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelCharacterSpeed2.setText("Speed");
+        jLabelCharacterSpeed.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabelCharacterSpeed.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCharacterSpeed.setText("Speed");
+
+        jProgressBarHealth.setForeground(new java.awt.Color(255, 102, 102));
+
+        jLabelHealth.setForeground(new java.awt.Color(255, 102, 102));
+        jLabelHealth.setText("health");
+
+        jLabelCharacterLevel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabelCharacterLevel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCharacterLevel1.setText("Level");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextFieldCharacterName, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(7, 7, 7)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelCharacterhealth)
+                            .addComponent(jLabelCharacterName)
+                            .addComponent(jLabelCharacterSpeed)
+                            .addComponent(jLabelCharacterLevel1))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGap(47, 47, 47)
+                                .addComponent(jTextFieldCharacterName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelLevel)
-                                    .addComponent(jLabelCharacterhealth)
-                                    .addComponent(jLabelCharacterSpeed1)
-                                    .addComponent(jLabelCharacterName)
-                                    .addComponent(jLabelCharacterSpeed2))
-                                .addGap(24, 24, 24)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTextFieldCharacterHealth, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextFieldCharacterLevel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTextFieldCharacterItem, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldCharacterSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabelCharacterTittle, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanelImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jTextFieldCharacterSpeed)
+                                        .addComponent(jProgressBarHealth, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                                    .addComponent(jTextFieldCharacterLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelHealth, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelCharacterTittle, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(92, 92, 92)
-                .addComponent(jProgressBarExperience, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlabelCharacterEXP, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanelImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jProgressBarExperience, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jlabelCharacterEXP, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanelImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabelCharacterTittle)
                         .addGap(9, 9, 9)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelCharacterName)
                             .addComponent(jTextFieldCharacterName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelLevel)
-                            .addComponent(jTextFieldCharacterLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelCharacterhealth)
-                    .addComponent(jTextFieldCharacterHealth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldCharacterSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelCharacterSpeed2))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelCharacterSpeed1)
-                    .addComponent(jTextFieldCharacterItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jProgressBarExperience, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlabelCharacterEXP, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                            .addComponent(jLabelCharacterLevel1)
+                            .addComponent(jTextFieldCharacterLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelCharacterSpeed)
+                            .addComponent(jTextFieldCharacterSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabelCharacterhealth)
+                                .addComponent(jProgressBarHealth, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabelHealth))
+                        .addGap(50, 50, 50)
+                        .addComponent(jProgressBarExperience, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jlabelCharacterEXP))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 0));
@@ -279,14 +299,116 @@ public class GameScreen extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTimeTittle)
                     .addComponent(jLabelClockTime))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addComponent(jbuttonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(16, 16, 16)
                     .addComponent(jLabelGameStadisctics)
-                    .addContainerGap(228, Short.MAX_VALUE)))
+                    .addContainerGap(112, Short.MAX_VALUE)))
+        );
+
+        jPanel3.setBackground(new java.awt.Color(20, 86, 152));
+
+        jLabelItemTitle.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabelItemTitle.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelItemTitle.setText("Item");
+
+        jLabelItemName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabelItemName.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelItemName.setText("Name");
+
+        jLabelItemLevel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabelItemLevel.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelItemLevel.setText("Level");
+
+        jTextFieldItemName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldItemName.setFocusable(false);
+
+        jPanelItemImage.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanelItemImageLayout = new javax.swing.GroupLayout(jPanelItemImage);
+        jPanelItemImage.setLayout(jPanelItemImageLayout);
+        jPanelItemImageLayout.setHorizontalGroup(
+            jPanelItemImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelItemImageLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabelItemImage, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+        jPanelItemImageLayout.setVerticalGroup(
+            jPanelItemImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelItemImageLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jLabelItemImage)
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+
+        jTextFieldItemLevel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldItemLevel.setFocusable(false);
+        jTextFieldItemLevel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldItemLevelActionPerformed(evt);
+            }
+        });
+
+        jTextFieldItemDamage.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldItemDamage.setFocusable(false);
+        jTextFieldItemDamage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldItemDamageActionPerformed(evt);
+            }
+        });
+
+        jLabelItemDamage.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabelItemDamage.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelItemDamage.setText("Damage");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelItemTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelItemName)
+                            .addComponent(jLabelItemLevel)
+                            .addComponent(jLabelItemDamage))
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldItemLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldItemName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldItemDamage, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jPanelItemImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabelItemTitle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelItemName)
+                            .addComponent(jTextFieldItemName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelItemLevel)
+                            .addComponent(jTextFieldItemLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldItemDamage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelItemDamage)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanelItemImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -298,7 +420,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -309,8 +432,10 @@ public class GameScreen extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -318,6 +443,7 @@ public class GameScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbuttonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonSalirActionPerformed
+        this.admGame.stopGame = true;
         MainScreen ventana = new MainScreen();
         ventana.setVisible(true);
         this.dispose();
@@ -327,6 +453,51 @@ public class GameScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldCharacterLevelActionPerformed
 
+    private void jTextFieldItemLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldItemLevelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldItemLevelActionPerformed
+
+    private void jTextFieldItemDamageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldItemDamageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldItemDamageActionPerformed
+    public void updateInterface(){
+        Fighter fighter = admGame.getBoard().getFighter();
+        String fighter_name  = fighter.getName();
+        int fighter_level = fighter.getLevel();
+        double fighter_health = fighter.getHealth();
+        double fighter_speed = fighter.getSpeed();
+        double fighter_experience = fighter.getExperience();
+        
+        String itemName= fighter.getSelectedItem().getName();
+        int itemLevel = fighter.getSelectedItem().getLevel();
+        double itemDamage = fighter.getSelectedItem().getDamage();
+        
+        this.jTextFieldCharacterName.setText(fighter_name);
+        this.jTextFieldCharacterLevel.setText(String.valueOf(fighter_level));
+        this.jTextFieldCharacterSpeed.setText(String.valueOf(fighter_speed));
+        
+        this.jProgressBarHealth.setValue((int) fighter_health);
+        this.jProgressBarExperience.setValue((int) fighter_experience);
+        
+        this.jTextFieldItemName.setText(itemName);
+        this.jTextFieldItemLevel.setText(String.valueOf(itemLevel));
+        this.jTextFieldItemDamage.setText(String.valueOf(itemDamage));
+        
+        paintImage(jPanelImage, fighter.getCurrentTexture(), jLabelCharacterImage);
+        paintImage(jPanelItemImage, fighter.getSelectedItem().getCurrentTexture(), jLabelItemImage);
+        this.repaint();
+    }
+    private void paintImage(JPanel panel, String route, JLabel label){
+        label.setSize(panel.getWidth()/2, panel.getHeight()/2);
+        ImageIcon image = new ImageIcon(route);
+        Icon icon = new ImageIcon(image.getImage().getScaledInstance(
+                                    label.getWidth(), 
+                                    label.getHeight(), 
+                                    Image.SCALE_DEFAULT));
+        panel.add(label);
+        panel.repaint();
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -363,24 +534,34 @@ public class GameScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabelCharacterImage;
+    private javax.swing.JLabel jLabelCharacterLevel1;
     private javax.swing.JLabel jLabelCharacterName;
-    private javax.swing.JLabel jLabelCharacterSpeed1;
-    private javax.swing.JLabel jLabelCharacterSpeed2;
+    private javax.swing.JLabel jLabelCharacterSpeed;
     private javax.swing.JLabel jLabelCharacterTittle;
     private javax.swing.JLabel jLabelCharacterhealth;
     private javax.swing.JLabel jLabelClockTime;
     private javax.swing.JLabel jLabelGameStadisctics;
-    private javax.swing.JLabel jLabelLevel;
+    private javax.swing.JLabel jLabelHealth;
+    private javax.swing.JLabel jLabelItemDamage;
+    private javax.swing.JLabel jLabelItemImage;
+    private javax.swing.JLabel jLabelItemLevel;
+    private javax.swing.JLabel jLabelItemName;
+    private javax.swing.JLabel jLabelItemTitle;
     private javax.swing.JLabel jLabelTimeTittle;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelImage;
+    private javax.swing.JPanel jPanelItemImage;
     private javax.swing.JProgressBar jProgressBarExperience;
-    private javax.swing.JTextField jTextFieldCharacterHealth;
-    private javax.swing.JTextField jTextFieldCharacterItem;
+    private javax.swing.JProgressBar jProgressBarHealth;
     private javax.swing.JTextField jTextFieldCharacterLevel;
     private javax.swing.JTextField jTextFieldCharacterName;
     private javax.swing.JTextField jTextFieldCharacterSpeed;
+    private javax.swing.JTextField jTextFieldItemDamage;
+    private javax.swing.JTextField jTextFieldItemLevel;
+    private javax.swing.JTextField jTextFieldItemName;
     private javax.swing.JButton jbuttonSalir;
     private javax.swing.JLabel jlabelCharacterEXP;
     private javax.swing.JPanel screenBoard;
