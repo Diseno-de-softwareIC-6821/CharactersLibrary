@@ -1,27 +1,38 @@
 
 import { IPrototypeFactory } from "../Interfaces/IPrototypeFactory";
-import { IPrototype } from "../Interfaces/iPrototype";
 import { Item } from "../Classes/Item";
 
+import ItemBlueprint from "../Json/ItemBlueprint.json";
 
 export class ItemFactory implements IPrototypeFactory{
     
     prototypes: Map<string, Item> = new Map<string, Item>();
 
     constructor(){
-        this.addPrototype("item", new Item(
-            "Sword",
-            0,
-            10,
-            10,
-            10,
-            10,
-            10,
-            0,
-            10,
-            new Map<number, string>([[0, "texture1"], [1, "texture2"]]),
-            "texture1"
-          ));
+
+        for (let i = 0; i < ItemBlueprint.length; i++) {
+            const element = ItemBlueprint[i];
+
+            // create Map for textureMap object
+            let textureMap: Map<number, string> = new Map<number, string>();
+            Object.entries(element.textureMap).forEach(([key, value]) => {
+                textureMap.set(Number(key), value);
+            });
+
+            this.addPrototype(element.name, new Item(
+                element.name,
+                element.type,
+                element.level,
+                element.scope,
+                element.duration,
+                element.damage,
+                element.exploRange,
+                element.weaponType,
+                element.ammo,
+                textureMap,
+                element.currentTexture,
+            ));
+        }
     }
 
     getClone(type: string, qty: number): Item[] {

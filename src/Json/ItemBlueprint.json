@@ -1,62 +1,38 @@
 [
     {
-        "name": "Sword",
+        "name": "Espada",
         "type": 0,
-        "level": 10,
+        "level": 0,
         "scope": 10,
         "duration": 10,
         "damage": 10,
         "exploRange": 10,
         "weaponType": 0,
-        "ammo": 10,
+        "ammo": 0,
         "textureMap": {
-            "0": "texture1",
-            "1": "texture2"
-        }
+            "0": "Espada1.png",
+            "1": "Espada2.png",
+            "2": "Espada3.png",
+            "3": "Espada4.png"
+        },
+        "currentTexture": "Espada1.png"
     },
     {
-        "name": "Gun",
+        "name": "Arco",
         "type": 0,
-        "level": 10,
+        "level": 0,
         "scope": 10,
         "duration": 10,
         "damage": 10,
-        "exploRange": 10,
-        "weaponType": 0,
+        "exploRange": 0,
+        "weaponType": 1,
         "ammo": 10,
         "textureMap": {
-            "0": "texture1",
-            "1": "texture2"
-        }
-    },
-    {
-        "name": "Rocket",
-        "type": 0,
-        "level": 10,
-        "scope": 10,
-        "duration": 10,
-        "damage": 10,
-        "exploRange": 10,
-        "weaponType": 0,
-        "ammo": 10,
-        "textureMap": {
-            "0": "texture1",
-            "1": "texture2"
-        }
-    },
-    {
-        "name": "Grenade",
-        "type": 0,
-        "level": 10,
-        "scope": 10,
-        "duration": 10,
-        "damage": 10,
-        "exploRange": 10,
-        "weaponType": 0,
-        "ammo": 10,
-        "textureMap": {
-            "0": "texture1",
-            "1": "texture2"
-        }
+            "0": "Arco1.png",
+            "1": "Arco2.png",
+            "2": "Arco3.png",
+            "3": "Arco4.png"
+        },
+        "currentTexture": "Arco1.png"
     }
 ]

@@ -5,8 +5,8 @@ export interface IPrototypeFactory {
 
     prototypes: Map<string, IPrototype>;
 
-    getClone(type: string, qty: number): Item[];
-    getDeepClone(type: string, qty: number): Item[];
+    getClone(type: string, qty: number): any[];
+    getDeepClone(type: string, qty: number): any[];
     addPrototype(type: string, prototype: IPrototype): void;
 
 }
