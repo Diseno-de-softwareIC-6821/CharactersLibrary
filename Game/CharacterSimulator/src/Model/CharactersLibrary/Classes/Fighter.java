@@ -6,13 +6,14 @@ package Model.CharactersLibrary.Classes;
 
 import Model.CharactersLibrary.Intefaces.ILeveled;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
  * @author Esteb
  */
 public class Fighter implements  ILeveled{
-    // public HashMap<int, String> textures;
+    public HashMap<Integer, String> textures;
     public String currentTexture;
     public ArrayList<Item>  items;
     public Item selectedItem;
@@ -28,7 +29,8 @@ public class Fighter implements  ILeveled{
     public int posX;
     public int posY;
 
-    public Fighter(String currentTexture, ArrayList<Item> items, Item selectedItem, String name, int level, double experience, double health, double defense, double speed, double dps, int spawnLevel, int housingSpace, int posX, int posY) {
+    public Fighter(HashMap<Integer, String> textures, String currentTexture, ArrayList<Item> items, Item selectedItem, String name, int level, double experience, double health, double defense, double speed, double dps, int spawnLevel, int housingSpace, int posX, int posY) {
+        this.textures = textures;
         this.currentTexture = currentTexture;
         this.items = items;
         this.selectedItem = selectedItem;
@@ -57,8 +59,9 @@ public class Fighter implements  ILeveled{
 
     @Override
     public String toString() {
-        return "CharacterGame{" +
-                "currentTexture='" + currentTexture + '\'' +
+        return "Fighter{" +
+                "textures=" + textures +
+                ", currentTexture='" + currentTexture + '\'' +
                 ", items=" + items +
                 ", selectedItem=" + selectedItem +
                 ", name='" + name + '\'' +
