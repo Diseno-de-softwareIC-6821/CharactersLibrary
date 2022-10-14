@@ -55,6 +55,9 @@ public class Fighter implements  ILeveled,IAction {
     public Fighter() {
         
     }
+    public void addItem(Item newItem ){
+        this.items.add(newItem);
+    }
     
 
    

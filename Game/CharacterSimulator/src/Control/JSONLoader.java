@@ -6,12 +6,16 @@ import java.util.HashMap;
 
 import Model.CharactersLibrary.Classes.Fighter;
 import Model.CharactersLibrary.Classes.Item;
+import Model.CharactersLibrary.Intefaces.ILeveled;
+import Model.Enums.EIleveled;
 import Model.Enums.EType;
 import Model.Enums.EWeapon;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
 import Model.GameClasses.Configuration;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class JSONLoader {
 
@@ -64,7 +68,7 @@ public class JSONLoader {
         }
     }
 
-     private static Item ItemConstructor(JSONObject itemJSON){
+    private static Item ItemConstructor(JSONObject itemJSON){
 
         return new Item((String) itemJSON.get("name"),
                 eTypeSelecter(((Long) itemJSON.get("type")).intValue()),
@@ -79,7 +83,7 @@ public class JSONLoader {
                 (String) itemJSON.get("currentTexture"));
     }
 
-     public static ArrayList<Item> ItemParser(JSONArray itemArrayJSON){
+    private static ArrayList<Item> ItemParser(JSONArray itemArrayJSON){
 
         ArrayList<Item> loadedCharItems= new ArrayList<>();
         //INSTANCE OF CHARACTERS IN ARRAYLIST
@@ -87,6 +91,19 @@ public class JSONLoader {
             loadedCharItems.add(ItemConstructor((JSONObject) itemArrayJSON.get(i)));
         }
         return loadedCharItems;
+    }
+    public static ArrayList<Item> getAllItems() throws IOException, FileNotFoundException, ParseException{
+        JSONArray jsonCharArray = getJSON();
+        ArrayList<Item> allItemList = new ArrayList<>();
+        for (int i = 0; i < jsonCharArray.size(); i++){
+            JSONObject jobject = (JSONObject) jsonCharArray.get(i);
+                    
+            ArrayList<Item> items = ItemParser((JSONArray) jobject.get("items"));
+            for(Item item: items){
+                allItemList.add(item);
+            } 
+        }
+        return allItemList;
     }
 
      private static Fighter CharacterConstructor(JSONObject characterJSON){
@@ -110,13 +127,41 @@ public class JSONLoader {
             ((Long) characterJSON.get("posX")).intValue(),
             ((Long) characterJSON.get("posY")).intValue());
     }
-
-    public static ArrayList<Fighter> CharacterParser() throws Exception{
-
-        //READS JSON
+    private static JSONArray getJSON( ) throws FileNotFoundException, IOException, ParseException{
         Object jsonFileRead = new JSONParser().parse(new FileReader(Configuration.JSON_ROUTE));
         // TYPECASTING TO JSONARRAY
         JSONArray jsonCharArray = (JSONArray) jsonFileRead;
+        return jsonCharArray;
+    }
+    public static ArrayList<ILeveled> getIleveled(EIleveled ileveled) throws ParseException, IOException{
+        ArrayList<ILeveled> ileveledList = new ArrayList<>();
+ 
+        switch (ileveled) {
+            case FIGHTER:
+                ArrayList<Fighter> ChFighters = getAllFighters(); 
+                for(Fighter oneFighter : ChFighters){
+                    ileveledList.add(oneFighter);
+                }
+                break;
+            case ITEMS:
+                ArrayList<Item> chItems = getAllItems();
+                for(Item item: chItems){
+                    ileveledList.add(item);
+                }
+                break;
+            default:
+                
+        }
+        return ileveledList;
+
+    }
+  
+ 
+ 
+    public static ArrayList<Fighter> getAllFighters() throws ParseException, IOException {
+
+        //READS JSON
+        JSONArray jsonCharArray = getJSON();
 
         ArrayList<Fighter> loadedCharacters = new ArrayList<>();
         //INSTANCE OF CHARACTERS IN ARRAYLIST

@@ -10,6 +10,7 @@ import Model.CharactersLibrary.Classes.Item;
 import Model.CharactersLibrary.Intefaces.ILeveled;
 import Model.CircularList.CircularStructure;
 import Model.CircularList.Node;
+import Model.Enums.EIleveled;
 import Model.GameClasses.Configuration;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -43,14 +44,15 @@ public class MainScreen extends javax.swing.JFrame {
         SpinnerModel smodel = new SpinnerNumberModel(2, 2, 20, 1);
         list = new CircularStructure();
         
-        ArrayList<Fighter> characterList = JSONLoader.CharacterParser();
+        ArrayList<ILeveled> characterList =  JSONLoader.getIleveled(EIleveled.FIGHTER);
         
-        list.insert((ArrayList<ILeveled>) (ILeveled) characterList);
+        list.insert( characterList);
         
         this.squaresSizeSpinner.setModel(smodel);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         current = list.first;
+        updateUI();
     }
     private void updateUI(){
         String route ="";
@@ -228,6 +230,11 @@ public class MainScreen extends javax.swing.JFrame {
         });
 
         jButtonBack.setText("Back");
+        jButtonBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBackActionPerformed(evt);
+            }
+        });
 
         jPanelImage.setBackground(new java.awt.Color(255, 255, 255));
         jPanelImage.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(204, 0, 102), null, new java.awt.Color(102, 0, 0)));
@@ -499,9 +506,9 @@ public class MainScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStartActionPerformed
-        //GameScreen newGame = new GameScreen((int) squaresSizeSpinner.getValue());
-        //newGame.setVisible(true);
-        //this.dispose();
+        GameScreen newGame = new GameScreen((int) squaresSizeSpinner.getValue(), this.selectedFighter);
+        newGame.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButtonStartActionPerformed
 
     private void jButtonDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDoneActionPerformed
@@ -510,18 +517,28 @@ public class MainScreen extends javax.swing.JFrame {
             paintImage(jPanelCharacterSelected, selectedFighter.getCurrentTexture(), jLabelCharacterSelected);
             jLabelSpeed.setText("Ammo");
             list = new CircularStructure();
-            this.jButtonStart.setEnabled(true);
-        }else{
             
+            this.jButtonStart.setEnabled(true);
+        }else if(this.selectedItem == null){ 
             selectedItem  = (Item) current.getIleveled();
+            this.selectedFighter.addItem(selectedItem);
             paintImage(jPanelItemSelected, selectedItem.getCurrentTexture(), jLabelItemSelected);
             
+        }else{
+            this.jButtonStart.setEnabled(true);
         }
     }//GEN-LAST:event_jButtonDoneActionPerformed
 
     private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
-        // TODO add your handling code here:
+        current = current.getNext();
+        updateUI();
+              
     }//GEN-LAST:event_jButtonNextActionPerformed
+
+    private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
+         current = current.getBack();
+        updateUI();
+    }//GEN-LAST:event_jButtonBackActionPerformed
     public void ItemSelection(){
         this.jLabelSelection.setText("Choose one item");
         
