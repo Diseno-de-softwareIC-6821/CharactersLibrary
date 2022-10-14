@@ -7,6 +7,7 @@ package Model.CharactersLibrary.Classes;
 import Model.CharactersLibrary.Intefaces.ILeveled;
 import Model.Enums.EType;
 import Model.Enums.EWeapon;
+
 import java.util.HashMap;
 
 /**
@@ -82,6 +83,7 @@ public class Item implements ILeveled{
     public String getCurrentTexture() {
         return currentTexture;
     }
+
     @Override
     public String toString() {
         return "Item{" +
@@ -98,5 +100,5 @@ public class Item implements ILeveled{
                 ", currentTexture='" + currentTexture + '\'' +
                 '}';
     }
-    
+
 }

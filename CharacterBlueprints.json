@@ -1,0 +1,111 @@
+[
+    {
+        "textureMap": {
+          "0": "texture1",
+          "1": "texture2"
+        },
+        "currentTexture": "texture1",
+        "items": [
+            {
+              "name": "Sword",
+              "type": 0,
+              "level": 10,
+              "scope": 10,
+              "duration": 10,
+              "damage": 10,
+              "exploRange": 10,
+              "weaponType": 0,
+              "ammo": 10,
+              "textureMap": {
+                "0": "texture1",
+                "1": "texture2"
+              },
+              "currentTexture": "texture1"
+            },
+            {
+              "name": "Sword",
+              "type": 0,
+              "level": 10,
+              "scope": 10,
+              "duration": 10,
+              "damage": 10,
+              "exploRange": 10,
+              "weaponType": 0,
+              "ammo": 10,
+              "textureMap": {
+                "0": "texture1",
+                "1": "texture2"
+              },
+              "currentTexture": "texture1"
+            }
+          ],
+        "name": "Barbaro",
+        "level": 1,
+        "experience": 0,
+        "health": 100,
+        "damage": 10,
+        "defense": 10,
+        "speed": 10,
+        "dps": 10,
+        "cost": 10,
+        "spawnLevel": 0,
+        "housingSpace": 10,
+        "posX": 0,
+        "posY": 0
+    }
+
+    {
+        "textureMap": {
+          "0": "texture1",
+          "1": "texture2"
+        },
+        "currentTexture": "texture1",
+        "items": [
+            {
+              "name": "Sword",
+              "type": 0,
+              "level": 10,
+              "scope": 10,
+              "duration": 10,
+              "damage": 10,
+              "exploRange": 10,
+              "weaponType": 0,
+              "ammo": 10,
+              "textureMap": {
+                "0": "texture1",
+                "1": "texture2"
+              },
+              "currentTexture": "texture1"
+            },
+            {
+              "name": "Sword",
+              "type": 0,
+              "level": 10,
+              "scope": 10,
+              "duration": 10,
+              "damage": 10,
+              "exploRange": 10,
+              "weaponType": 0,
+              "ammo": 10,
+              "textureMap": {
+                "0": "texture1",
+                "1": "texture2"
+              },
+              "currentTexture": "texture1"
+            }
+          ],
+        "name": "Arquera",
+        "level": 1,
+        "experience": 0,
+        "health": 100,
+        "damage": 10,
+        "defense": 10,
+        "speed": 10,
+        "dps": 10,
+        "cost": 10,
+        "spawnLevel": 0,
+        "housingSpace": 10,
+        "posX": 0,
+        "posY": 0
+    }
+]

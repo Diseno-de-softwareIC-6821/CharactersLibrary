@@ -5,16 +5,20 @@
 package Model.CharactersLibrary.Classes;
 
 import Model.CharactersLibrary.Intefaces.ILeveled;
+
 import Model.CharactersLibrary.Intefaces.IAction;
 
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 /**
  *
  * @author Esteb
  */
+
 public class Fighter implements  ILeveled,IAction {
+
     public HashMap<Integer, String> textures;
     public String currentTexture;
     public ArrayList<Item>  items;
@@ -163,6 +167,25 @@ public class Fighter implements  ILeveled,IAction {
                 '}';
     }
 
-    
-    
+    @Override
+    public String toString() {
+        return "Fighter{" +
+                "textures=" + textures +
+                ", currentTexture='" + currentTexture + '\'' +
+                ", items=" + items +
+                ", selectedItem=" + selectedItem +
+                ", name='" + name + '\'' +
+                ", level=" + level +
+                ", experience=" + experience +
+                ", health=" + health +
+                ", defense=" + defense +
+                ", speed=" + speed +
+                ", dps=" + dps +
+                ", spawnLevel=" + spawnLevel +
+                ", housingSpace=" + housingSpace +
+                ", posX=" + posX +
+                ", posY=" + posY +
+                '}';
+    }
+
 }
