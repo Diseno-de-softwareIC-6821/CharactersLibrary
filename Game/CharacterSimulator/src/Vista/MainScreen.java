@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Model.CircularList.CircularStructure;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
@@ -17,9 +18,11 @@ public class MainScreen extends javax.swing.JFrame {
     /**
      * Creates new form MainScreen
      */
+    CircularStructure list;
     public MainScreen() {
         initComponents();
         SpinnerModel smodel = new SpinnerNumberModel(2, 2, 20, 1);
+        
         this.squaresSizeSpinner.setModel(smodel);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -47,6 +50,7 @@ public class MainScreen extends javax.swing.JFrame {
         jButtonNext = new javax.swing.JButton();
         jButtonBack = new javax.swing.JButton();
         jPanelImage = new javax.swing.JPanel();
+        jLabelImageSelectYourCharacter = new javax.swing.JLabel();
         jButtonDone = new javax.swing.JButton();
         jLabelSelection = new javax.swing.JLabel();
         jPanelStadistics = new javax.swing.JPanel();
@@ -60,7 +64,9 @@ public class MainScreen extends javax.swing.JFrame {
         jProgressBarHealth = new javax.swing.JProgressBar();
         jTextFieldName = new javax.swing.JTextField();
         jPanelCharacterSelected = new javax.swing.JPanel();
+        jLabelImageCharacterSelected = new javax.swing.JLabel();
         jPanelItemSelected = new javax.swing.JPanel();
+        jLabelItemSelected = new javax.swing.JLabel();
         jLabelPlus = new javax.swing.JLabel();
         jLabelCharacterSelected = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -162,15 +168,23 @@ public class MainScreen extends javax.swing.JFrame {
         jPanelImage.setBackground(new java.awt.Color(255, 255, 255));
         jPanelImage.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(204, 0, 102), null, new java.awt.Color(102, 0, 0)));
 
+        jLabelImageSelectYourCharacter.setText("jLabel2");
+
         javax.swing.GroupLayout jPanelImageLayout = new javax.swing.GroupLayout(jPanelImage);
         jPanelImage.setLayout(jPanelImageLayout);
         jPanelImageLayout.setHorizontalGroup(
             jPanelImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanelImageLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabelImageSelectYourCharacter, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanelImageLayout.setVerticalGroup(
             jPanelImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanelImageLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabelImageSelectYourCharacter)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         jButtonDone.setBackground(new java.awt.Color(219, 219, 124));
@@ -311,26 +325,42 @@ public class MainScreen extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabelImageCharacterSelected.setText("jLabel2");
+
         javax.swing.GroupLayout jPanelCharacterSelectedLayout = new javax.swing.GroupLayout(jPanelCharacterSelected);
         jPanelCharacterSelected.setLayout(jPanelCharacterSelectedLayout);
         jPanelCharacterSelectedLayout.setHorizontalGroup(
             jPanelCharacterSelectedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 112, Short.MAX_VALUE)
+            .addGroup(jPanelCharacterSelectedLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jLabelImageCharacterSelected, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanelCharacterSelectedLayout.setVerticalGroup(
             jPanelCharacterSelectedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCharacterSelectedLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelImageCharacterSelected)
+                .addGap(32, 32, 32))
         );
+
+        jLabelItemSelected.setText("jLabel2");
 
         javax.swing.GroupLayout jPanelItemSelectedLayout = new javax.swing.GroupLayout(jPanelItemSelected);
         jPanelItemSelected.setLayout(jPanelItemSelectedLayout);
         jPanelItemSelectedLayout.setHorizontalGroup(
             jPanelItemSelectedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelItemSelectedLayout.createSequentialGroup()
+                .addContainerGap(33, Short.MAX_VALUE)
+                .addComponent(jLabelItemSelected, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
         jPanelItemSelectedLayout.setVerticalGroup(
             jPanelItemSelectedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelItemSelectedLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelItemSelected)
+                .addGap(34, 34, 34))
         );
 
         jLabelPlus.setFont(new java.awt.Font("Unispace", 0, 48)); // NOI18N
@@ -476,7 +506,10 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelCharacterSelected;
     private javax.swing.JLabel jLabelConfiguration;
     private javax.swing.JLabel jLabelDamage;
+    private javax.swing.JLabel jLabelImageCharacterSelected;
+    private javax.swing.JLabel jLabelImageSelectYourCharacter;
     private javax.swing.JLabel jLabelInformationTitle;
+    private javax.swing.JLabel jLabelItemSelected;
     private javax.swing.JLabel jLabelMaintitle;
     private javax.swing.JLabel jLabelName;
     private javax.swing.JLabel jLabelPlus;

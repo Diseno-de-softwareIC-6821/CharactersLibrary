@@ -91,7 +91,6 @@ public class Proxy implements IAction,ILeveled{
     @Override
     public void levelUp() {
         fighter.levelUp();
-       
     }
 
     @Override

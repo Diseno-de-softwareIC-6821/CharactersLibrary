@@ -20,6 +20,7 @@ public class Configuration {
     public static final Color DEFAULT_SQUARE_COLOR = Color.WHITE;
     public static final int SCREEN_SIZE = 600;   
     public static final Border DEFAULT_SQUARE_BORDER = BorderFactory.createLineBorder(Color.BLACK);
+    public static final int IMAGE_SIZE_SETTING  = 2;
     //
     
     
