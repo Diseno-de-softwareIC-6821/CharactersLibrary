@@ -70,9 +70,27 @@ public class Board {
     public int getActualY(){
         return this.fighter.getPosY();
     }
-    public boolean isNextMoveValid(){
-  
+    public boolean isNextMoveValid(EMovements nextMove){
+        boolean isValid = true;
+        switch(nextMove){
+            case MOVE_UP: 
+                if(this.fighter.getPosY()+1 >= this.size){isValid = false;}
+                break;
+            case MOVE_DOWN: 
+                if(this.fighter.getPosY()-1 <= -1 ){isValid = false;}
+                break;
+            case MOVE_LEFT: 
+                if(this.fighter.getPosX()-1 <=0){ isValid = false ;}
+                break;
+            case MOVE_RIGHT: 
+                if(this.fighter.getPosX()+1 >=this.size){isValid = false;}
+                break;
+            default: 
+                System.out.println("No movement implemented");
+                isValid = false ;
+        }
         
+        return isValid;
     }
     public void beforeMove(){
         
