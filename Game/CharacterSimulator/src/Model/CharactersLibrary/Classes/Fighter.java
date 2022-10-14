@@ -167,25 +167,6 @@ public class Fighter implements  ILeveled,IAction {
                 '}';
     }
 
-    @Override
-    public String toString() {
-        return "Fighter{" +
-                "textures=" + textures +
-                ", currentTexture='" + currentTexture + '\'' +
-                ", items=" + items +
-                ", selectedItem=" + selectedItem +
-                ", name='" + name + '\'' +
-                ", level=" + level +
-                ", experience=" + experience +
-                ", health=" + health +
-                ", defense=" + defense +
-                ", speed=" + speed +
-                ", dps=" + dps +
-                ", spawnLevel=" + spawnLevel +
-                ", housingSpace=" + housingSpace +
-                ", posX=" + posX +
-                ", posY=" + posY +
-                '}';
-    }
+    
 
 }
