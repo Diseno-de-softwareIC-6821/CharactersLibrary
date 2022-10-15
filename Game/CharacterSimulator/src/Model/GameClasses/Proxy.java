@@ -10,6 +10,7 @@ import Model.CharactersLibrary.Classes.Fighter;
 import Model.CharactersLibrary.Intefaces.IAction;
 import Model.CharactersLibrary.Intefaces.ILeveled;
 import Vista.GameScreen;
+import java.util.ArrayList;
 /**
  *
  * @author Esteb
@@ -51,10 +52,13 @@ public class Proxy implements IAction,ILeveled{
         if(this.board.isNextMoveValid(EMovements.MOVE_UP)){
             this.board.beforeMove();
             fighter.moveUp();
-            this.board.moveFighter();
+            this.board.moveFighter(fighter);
+            System.out.println("Moving Up");
+
         }
      
     }
+    
 
     @Override
     public void moveDown() {
@@ -62,7 +66,8 @@ public class Proxy implements IAction,ILeveled{
         if(this.board.isNextMoveValid(EMovements.MOVE_DOWN)){
             this.board.beforeMove();
             fighter.moveDown();
-            this.board.moveFighter();
+            this.board.moveFighter(fighter);
+            System.out.println("Moving down");
         }
      
     }
@@ -72,7 +77,8 @@ public class Proxy implements IAction,ILeveled{
         if(this.board.isNextMoveValid(EMovements.MOVE_LEFT)){
             this.board.beforeMove();
             fighter.moveLeft();
-            this.board.moveFighter();
+            this.board.moveFighter(fighter);
+            System.out.println("Moving Left");
         }
     }
 
@@ -81,23 +87,38 @@ public class Proxy implements IAction,ILeveled{
         if(this.board.isNextMoveValid(EMovements.MOVE_RIGHT)){
             this.board.beforeMove();
             fighter.moveRight();
-            this.board.moveFighter();
+            this.board.moveFighter(fighter);
+            this.board.getSquare(fighter.getPosX(), fighter.getPosY()).changeState();
+            System.out.println("Moving Right");
         }
         
     }
 
-
-
     @Override
     public void levelUp() {
         fighter.levelUp();
-       
+        
     }
 
     @Override
     public void levelDown() {
 
         fighter.levelDown();
+    }
+
+    @Override
+    public void nextWeapon() {
+        this.fighter.nextWeapon();
+        System.out.println("Change weapon to "+this.fighter.getSelectedItem().name);
+    }
+
+    @Override
+    public void attack(Fighter fighter) {
+        ArrayList<Fighter> enemies = board.getNearEnemies();
+        for(Fighter enemy : enemies){
+            this.fighter.attack(enemy);
+            System.out.println("Attacking to "+ enemy.toString());
+        }
     }
 
 }

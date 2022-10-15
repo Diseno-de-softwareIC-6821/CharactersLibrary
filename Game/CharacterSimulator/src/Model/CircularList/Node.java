@@ -5,19 +5,20 @@
 package Model.CircularList;
 
 import Model.CharactersLibrary.Classes.Fighter;
+import Model.CharactersLibrary.Intefaces.ILeveled;
 
 /**
  *
  * @author Esteb
  */
 public class Node {
-    private Fighter fighter; 
+    private ILeveled fighterOrItem; 
     
     private Node next; 
     private Node back;
 
-    public Node(Fighter fighter) {
-        this.fighter = fighter;
+    public Node(ILeveled fighter) {
+        this.fighterOrItem = fighter;
     }
     
     public Node getNext() {
@@ -36,8 +37,8 @@ public class Node {
         this.back = back;
     }
 
-    public Fighter getFighter() {
-        return fighter;
+    public ILeveled getIleveled() {
+        return fighterOrItem;
     }
     
 }

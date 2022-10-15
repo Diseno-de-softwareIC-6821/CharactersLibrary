@@ -5,6 +5,8 @@
 package Model.CircularList;
 
 import Model.CharactersLibrary.Classes.Fighter;
+import Model.CharactersLibrary.Intefaces.ILeveled;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,8 +20,8 @@ public class CircularStructure {
         first = null; 
         last = null;
     }
-    public void insert(Fighter oneFighter){
-        Node newNode  = new Node(oneFighter);
+    private void insert(ILeveled selection){
+        Node newNode  = new Node(selection);
         if(first == null){
             first = newNode;
             last = newNode; 
@@ -34,6 +36,11 @@ public class CircularStructure {
         }
         System.out.println("\nNode added");
    }
+    public void insert (ArrayList<ILeveled> list){
+        for(ILeveled oneObject : list){
+            insert(oneObject);
+        }
+    }
 }
     
 

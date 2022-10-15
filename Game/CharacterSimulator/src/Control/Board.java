@@ -13,7 +13,10 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import Model.GameClasses.Configuration;
+import Model.GameClasses.Container;
+import java.io.IOException;
 import javax.swing.border.Border;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -26,13 +29,62 @@ public class Board {
     private Square[][] squares;
     private int size; 
     private Fighter fighter; 
+    private ArrayList<Fighter> enemies; 
     
     public Board(int size, Fighter fighter) {
         this.squares = new Square[size][size];
         this.size = size;
         this.fighter = fighter;
         generateSquares();
+        enemies = new ArrayList<>();
     }
+    public void setUpEnemies() throws ParseException, IOException{
+        ArrayList<Fighter> newEnemies = JSONLoader.getAllFighters();
+        for(int i = 0; i<Configuration.ENEMIES_PER_LEVEL; i++){
+            enemies.add(newEnemies.get(i));
+        }
+    }
+    public ArrayList<Fighter> getNearEnemies(){
+        ArrayList<Fighter> nearEnemies = new ArrayList<>();
+        int x = fighter.getPosX();
+        int y = fighter.getPosY();
+        int weaponRange = fighter.getSelectedItem().getExploRange();
+        for(int i = x; i< x+weaponRange && isValidSquare(i, y); i++){
+            Fighter maybeEnemy = searchEnemyByPosition(i, y);
+            if(maybeEnemy != null){
+                nearEnemies.add(fighter);
+            }
+            
+        }
+        for(int i = x; i > x-weaponRange && isValidSquare(i, y); i--){
+            Fighter maybeEnemy = searchEnemyByPosition(i, y);
+            if(maybeEnemy != null){
+                nearEnemies.add(fighter);
+            }
+        }
+        for(int i = y; i< y+weaponRange && isValidSquare(i, y); i++){
+            Fighter maybeEnemy = searchEnemyByPosition(i, y);
+            if(maybeEnemy != null){
+                nearEnemies.add(fighter);
+            }
+        }
+        for(int i = y; i>y-weaponRange && isValidSquare(i, y); i--){
+             Fighter maybeEnemy = searchEnemyByPosition(i, y);
+            if(maybeEnemy != null){
+                nearEnemies.add(fighter);
+            }
+        }
+        return nearEnemies;
+    }
+    private Fighter searchEnemyByPosition(int i, int j ){
+        for(Fighter enemy : enemies){
+            if(enemy.getPosX() == i && enemy.getPosY() ==j ){
+                return enemy;
+            }
+        }
+        return null;
+    }
+    
     private void setFighter(Fighter oneFighter){
         this.fighter = oneFighter;
     }
@@ -75,20 +127,31 @@ public class Board {
     public int getActualY(){
         return this.fighter.getPosY();
     }
+    public boolean isValidSquare(int i, int j){
+        System.out.println("Checking for this position"+ String.valueOf(i)+","+ String.valueOf(j));
+        if((i < this.size && i>=0) &&(j < this.size && j >=0)){
+            Container nextContainer = this.getSquare(i, j).getContainer();
+            if( nextContainer !=Container.HOLE){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public boolean isNextMoveValid(EMovements nextMove){
         boolean isValid = true;
         switch(nextMove){
             case MOVE_UP: 
-                if(this.fighter.getPosY()+1 >= this.size){isValid = false;}
+                if(!isValidSquare(this.fighter.getPosX(), this.fighter.getPosY()-1)){isValid = false;}
                 break;
             case MOVE_DOWN: 
-                if(this.fighter.getPosY()-1 <= -1 ){isValid = false;}
+                if(!isValidSquare(this.fighter.getPosX(), this.fighter.getPosY()+1)){isValid = false;}
                 break;
             case MOVE_LEFT: 
-                if(this.fighter.getPosX()-1 <=0){ isValid = false ;}
+                if(!isValidSquare(this.fighter.getPosX()-1, this.fighter.getPosY())){ isValid = false ;}
                 break;
             case MOVE_RIGHT: 
-                if(this.fighter.getPosX()+1 >=this.size){isValid = false;}
+                if(!isValidSquare(this.fighter.getPosX()+1, this.fighter.getPosY())){isValid = false;}
                 break;
             default: 
                 System.out.println("No movement implemented");
@@ -101,18 +164,19 @@ public class Board {
         
         Square actualSquare = this.getSquare(this.getActualX(), this.getActualY());
         actualSquare.changeState();
+        actualSquare.getPanel().remove(actualSquare.getLabelImage());
+        actualSquare.getPanel().repaint();
     }
 
     //movement implementations 
     
-    public void moveFighter(){
-        
-        int x = this.fighter.getPosX();
-        int y = this.fighter.getPosY();
+    public void moveFighter(Fighter fighter){
+        int x = fighter.getPosX();
+        int y = fighter.getPosY();
         
         Square nextSquare = this.getSquare(x, y);
-        nextSquare.setImage(this.fighter.getCurrentTexture());
-        nextSquare.changeState(); 
+        nextSquare.setImage(fighter.getCurrentTexture());
+        
     }
 
     

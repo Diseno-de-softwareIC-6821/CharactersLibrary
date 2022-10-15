@@ -4,6 +4,8 @@
  */
 package Model.CharactersLibrary.Intefaces;
 
+import Model.CharactersLibrary.Classes.Fighter;
+
 /**
  *
  * @author Esteb
@@ -14,8 +16,9 @@ public interface IAction {
     public void moveDown();
     public void moveLeft();
     public void moveRight();
- 
-    
+    public void nextWeapon();
+    public void attack(Fighter fighter );
+
     
     
 }

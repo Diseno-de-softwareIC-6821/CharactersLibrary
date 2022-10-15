@@ -1,4 +1,10 @@
+
 package Model.Enums;
+
+/**
+ *
+ * @author Esteb
+ */
 
 public enum EWeapon {
     NO_WEAPON, //character without weapon
