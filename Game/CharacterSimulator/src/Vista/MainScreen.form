@@ -105,7 +105,7 @@
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jPanelSelection" min="-2" pref="243" max="-2" attributes="0"/>
+                      <Component id="jPanelSelection" min="-2" max="-2" attributes="0"/>
                       <Component id="jPanelStadistics" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -359,27 +359,24 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           <Component id="jLabelImageSelectYourCharacter" min="-2" pref="37" max="-2" attributes="0"/>
-                          <EmptySpace pref="33" max="32767" attributes="0"/>
+                          <EmptySpace pref="35" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                           <Component id="jLabelImageSelectYourCharacter" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="52" max="32767" attributes="0"/>
+                          <EmptySpace pref="47" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabelImageSelectYourCharacter">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="image"/>
-                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -576,9 +573,6 @@
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabelImageCharacterSelected">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel2"/>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -604,16 +598,13 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLabelItemSelected" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabelItemSelected">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel2"/>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>

@@ -37,6 +37,7 @@ public class Square {
     public void setImage(String route){
         
         ImageIcon image = new ImageIcon(Configuration.IMAGE_ROUTE.concat(route));
+        
         Icon icon = new ImageIcon(image.getImage().getScaledInstance(
                                     labelImage.getWidth(), 
                                     labelImage.getHeight(), 

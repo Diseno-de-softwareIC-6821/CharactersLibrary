@@ -97,6 +97,7 @@ public class MainScreen extends javax.swing.JFrame {
                                     label.getHeight(), 
                                     Image.SCALE_DEFAULT));
 
+        label.setIcon(icon);
         panel.add(label);
         panel.repaint();
     }
@@ -251,23 +252,21 @@ public class MainScreen extends javax.swing.JFrame {
         jPanelImage.setBackground(new java.awt.Color(255, 255, 255));
         jPanelImage.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(204, 0, 102), null, new java.awt.Color(102, 0, 0)));
 
-        jLabelImageSelectYourCharacter.setText("image");
-
         javax.swing.GroupLayout jPanelImageLayout = new javax.swing.GroupLayout(jPanelImage);
         jPanelImage.setLayout(jPanelImageLayout);
         jPanelImageLayout.setHorizontalGroup(
             jPanelImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelImageLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(28, 28, 28)
                 .addComponent(jLabelImageSelectYourCharacter, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanelImageLayout.setVerticalGroup(
             jPanelImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelImageLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(37, 37, 37)
                 .addComponent(jLabelImageSelectYourCharacter)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         jButtonDone.setBackground(new java.awt.Color(219, 219, 124));
@@ -397,8 +396,6 @@ public class MainScreen extends javax.swing.JFrame {
 
         jPanelCharacterSelected.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabelImageCharacterSelected.setText("jLabel2");
-
         javax.swing.GroupLayout jPanelCharacterSelectedLayout = new javax.swing.GroupLayout(jPanelCharacterSelected);
         jPanelCharacterSelected.setLayout(jPanelCharacterSelectedLayout);
         jPanelCharacterSelectedLayout.setHorizontalGroup(
@@ -418,8 +415,6 @@ public class MainScreen extends javax.swing.JFrame {
 
         jPanelItemSelected.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabelItemSelected.setText("jLabel2");
-
         javax.swing.GroupLayout jPanelItemSelectedLayout = new javax.swing.GroupLayout(jPanelItemSelected);
         jPanelItemSelected.setLayout(jPanelItemSelectedLayout);
         jPanelItemSelectedLayout.setHorizontalGroup(
@@ -434,7 +429,7 @@ public class MainScreen extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelItemSelectedLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelItemSelected)
-                .addGap(34, 34, 34))
+                .addGap(25, 25, 25))
         );
 
         jLabelPlus.setFont(new java.awt.Font("Unispace", 0, 48)); // NOI18N
@@ -489,7 +484,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanelSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanelStadistics, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -532,7 +527,7 @@ public class MainScreen extends javax.swing.JFrame {
     private void jButtonDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDoneActionPerformed
         if(this.selectedFighter == null){
             selectedFighter  = (Fighter) current.getIleveled();
-            paintImage(jPanelCharacterSelected, selectedFighter.getCurrentTexture(), jLabelCharacterSelected);
+            
             jLabelSpeed.setText("Ammo");
             list = new CircularStructure();
             try {
@@ -543,13 +538,13 @@ public class MainScreen extends javax.swing.JFrame {
                
             }
             this.jLabelSelection.setText("Select your Item");
-            
+            paintImage(jPanelCharacterSelected, selectedFighter.getCurrentTexture(), jLabelImageCharacterSelected);
             current = list.first;
             updateUI();
         }else if(this.selectedItem == null){ 
             selectedItem  = (Item) current.getIleveled();
             this.selectedFighter.addItem(selectedItem);
-            paintImage(jPanelItemSelected, selectedItem.getCurrentTexture(), jLabelItemSelected);
+            paintImage(jPanelItemSelected, selectedItem.getCurrentTexture(), jlabelIm);
             this.jButtonStart.setEnabled(true);
         }
     }//GEN-LAST:event_jButtonDoneActionPerformed
