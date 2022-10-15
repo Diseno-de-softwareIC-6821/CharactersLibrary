@@ -52,6 +52,8 @@ public class Proxy implements IAction,ILeveled{
             this.board.beforeMove();
             fighter.moveUp();
             this.board.moveFighter();
+            System.out.println("Moving Up");
+
         }
      
     }
@@ -63,6 +65,7 @@ public class Proxy implements IAction,ILeveled{
             this.board.beforeMove();
             fighter.moveDown();
             this.board.moveFighter();
+            System.out.println("Moving down");
         }
      
     }
@@ -73,6 +76,7 @@ public class Proxy implements IAction,ILeveled{
             this.board.beforeMove();
             fighter.moveLeft();
             this.board.moveFighter();
+            System.out.println("Moving Left");
         }
     }
 
@@ -82,11 +86,10 @@ public class Proxy implements IAction,ILeveled{
             this.board.beforeMove();
             fighter.moveRight();
             this.board.moveFighter();
+            System.out.println("Moving Right");
         }
         
     }
-
-
 
     @Override
     public void levelUp() {

@@ -35,6 +35,9 @@ public class GameScreen extends javax.swing.JFrame {
         this.jTextFieldCharacterLevel.setEditable(false);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.setFocusable(true);
+        
+        this.addKeyListener(admGame);
     }
     
     public void addBoard(Board board){
@@ -80,8 +83,6 @@ public class GameScreen extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jbuttonSalir = new javax.swing.JButton();
         jLabelGameStadisctics = new javax.swing.JLabel();
-        jLabelTimeTittle = new javax.swing.JLabel();
-        jLabelClockTime = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabelItemTitle = new javax.swing.JLabel();
         jLabelItemName = new javax.swing.JLabel();
@@ -95,7 +96,7 @@ public class GameScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        screenBoard.setBackground(new java.awt.Color(204, 204, 255));
+        screenBoard.setBackground(new java.awt.Color(102, 0, 102));
 
         javax.swing.GroupLayout screenBoardLayout = new javax.swing.GroupLayout(screenBoard);
         screenBoard.setLayout(screenBoardLayout);
@@ -264,15 +265,7 @@ public class GameScreen extends javax.swing.JFrame {
 
         jLabelGameStadisctics.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabelGameStadisctics.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelGameStadisctics.setText("Game stadistics");
-
-        jLabelTimeTittle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabelTimeTittle.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelTimeTittle.setText("Time");
-
-        jLabelClockTime.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabelClockTime.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelClockTime.setText("Time");
+        jLabelGameStadisctics.setText("Game ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -280,15 +273,8 @@ public class GameScreen extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jbuttonSalir)
-                        .addGap(15, 15, 15))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabelTimeTittle)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelClockTime)
-                        .addGap(38, 38, 38))))
+                .addComponent(jbuttonSalir)
+                .addGap(15, 15, 15))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(16, 16, 16)
@@ -298,11 +284,7 @@ public class GameScreen extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelTimeTittle)
-                    .addComponent(jLabelClockTime))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addContainerGap(119, Short.MAX_VALUE)
                 .addComponent(jbuttonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -457,6 +439,7 @@ public class GameScreen extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jbuttonSalirActionPerformed
 
+
     private void jTextFieldCharacterLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCharacterLevelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldCharacterLevelActionPerformed
@@ -496,6 +479,7 @@ public class GameScreen extends javax.swing.JFrame {
         this.repaint();
     }
     private void paintImage(JPanel panel, String route, JLabel label){
+        route = Configuration.IMAGE_ROUTE.concat(route);
         label.setSize(panel.getWidth()/Configuration.IMAGE_SIZE_SETTING, panel.getHeight()/Configuration.IMAGE_SIZE_SETTING);
         ImageIcon image = new ImageIcon(route);
         Icon icon = new ImageIcon(image.getImage().getScaledInstance(
@@ -548,7 +532,6 @@ public class GameScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelCharacterSpeed;
     private javax.swing.JLabel jLabelCharacterTittle;
     private javax.swing.JLabel jLabelCharacterhealth;
-    private javax.swing.JLabel jLabelClockTime;
     private javax.swing.JLabel jLabelGameStadisctics;
     private javax.swing.JLabel jLabelHealth;
     private javax.swing.JLabel jLabelItemDamage;
@@ -556,7 +539,6 @@ public class GameScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelItemLevel;
     private javax.swing.JLabel jLabelItemName;
     private javax.swing.JLabel jLabelItemTitle;
-    private javax.swing.JLabel jLabelTimeTittle;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -125,7 +125,8 @@ public class JSONLoader {
             ((Long) characterJSON.get("spawnLevel")).intValue(),
             ((Long) characterJSON.get("housingSpace")).intValue(),
             ((Long) characterJSON.get("posX")).intValue(),
-            ((Long) characterJSON.get("posY")).intValue());
+            ((Long) characterJSON.get("posY")).intValue(), 
+            ((Long) characterJSON.get("damage")).doubleValue());
     }
     private static JSONArray getJSON( ) throws FileNotFoundException, IOException, ParseException{
         Object jsonFileRead = new JSONParser().parse(new FileReader(Configuration.JSON_ROUTE));

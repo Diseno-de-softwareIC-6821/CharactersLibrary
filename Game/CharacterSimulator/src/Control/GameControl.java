@@ -17,9 +17,9 @@ import java.util.logging.Logger;
  * @author Esteb
  */
 public class GameControl extends Thread implements KeyListener {
-    Board board;
+    private Board board;
     GameScreen screen;
-    Proxy proxy;
+    private Proxy proxy;
     public  volatile boolean stopGame;
 
     public GameControl(int size, Fighter fighter, GameScreen screen) {
@@ -39,14 +39,14 @@ public class GameControl extends Thread implements KeyListener {
             try {
                 sleep(500);
             } catch (InterruptedException ex) {
-                System.out.println("failed theread");
+                System.out.print("failed theread");
             }
         }
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
-           System.out.println("Key Typed");
+        System.out.println("");
     }
 
     @Override
@@ -56,22 +56,22 @@ public class GameControl extends Thread implements KeyListener {
             case KeyEvent.VK_W:
                 proxy.moveUp();
                 //up
-                System.out.println("Moving up");
+       
                 break;
             case KeyEvent.VK_D:
                 proxy.moveRight();
                 //right
-                System.out.println("Moving Right");
+        
                 break;
             case KeyEvent.VK_A:
                 proxy.moveLeft();
                 //left
-                System.out.println("Moving left");
+      
                 break;
             case KeyEvent.VK_S:
                 proxy.moveDown();
                 //down
-                System.out.println("Moving down");
+              
                 break;
             default:
                 System.out.println("Another key have been pressed");
@@ -85,10 +85,13 @@ public class GameControl extends Thread implements KeyListener {
     public Board getBoard() {
         return board;
     }
+    public Proxy getProxy(){
+        return this.proxy;
+    }
     
     @Override
     public void keyReleased(KeyEvent e) {
-            System.out.println("KeyRelease");
+            System.out.print("");
     }
     
     

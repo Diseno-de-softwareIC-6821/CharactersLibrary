@@ -12,7 +12,9 @@ import Model.CircularList.CircularStructure;
 import Model.CircularList.Node;
 import Model.Enums.EIleveled;
 import Model.GameClasses.Configuration;
+import java.awt.Color;
 import java.awt.Image;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +25,8 @@ import javax.swing.JPanel;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.UIManager;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -52,23 +56,29 @@ public class MainScreen extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         current = list.first;
+        
+        jProgressBarSpeed.setStringPainted(true);
+        jProgressBarDamage.setStringPainted(true);
+
         updateUI();
     }
     private void updateUI(){
-        String route ="";
+        String nameImage ="";
         if(isFighter()){
             Fighter oneFighter = (Fighter) current.getIleveled();
             jTextFieldName.setText(oneFighter.getName());
             jProgressBarSpeed.setValue((int) oneFighter.getSpeed());
-            route = oneFighter.getCurrentTexture();
+            //jProgressBarDamage.setValue((int));
+            nameImage = oneFighter.getCurrentTexture();
+            jProgressBarDamage.setValue((int)oneFighter.getDamage());
         }else{
             Item oneItem = (Item) current.getIleveled();
             jTextFieldName.setText(oneItem.getName());
             jProgressBarSpeed.setValue((int) oneItem.getAmmo());
-            route = oneItem.getCurrentTexture();
+            nameImage = oneItem.getCurrentTexture();
         
         }
-        paintImage(jPanelSelection, route, jLabelImageSelectYourCharacter);
+        paintImage(jPanelSelection, nameImage, jLabelImageSelectYourCharacter);
 
         
     }
@@ -79,12 +89,14 @@ public class MainScreen extends javax.swing.JFrame {
         return false;
     }   
     private void paintImage(JPanel panel, String route, JLabel label){
+        route = Configuration.IMAGE_ROUTE.concat(route);
         label.setSize(panel.getWidth()/Configuration.IMAGE_SIZE_SETTING, panel.getHeight()/Configuration.IMAGE_SIZE_SETTING);
         ImageIcon image = new ImageIcon(route);
         Icon icon = new ImageIcon(image.getImage().getScaledInstance(
                                     label.getWidth(), 
                                     label.getHeight(), 
                                     Image.SCALE_DEFAULT));
+
         panel.add(label);
         panel.repaint();
     }
@@ -239,7 +251,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanelImage.setBackground(new java.awt.Color(255, 255, 255));
         jPanelImage.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(204, 0, 102), null, new java.awt.Color(102, 0, 0)));
 
-        jLabelImageSelectYourCharacter.setText("jLabel2");
+        jLabelImageSelectYourCharacter.setText("image");
 
         javax.swing.GroupLayout jPanelImageLayout = new javax.swing.GroupLayout(jPanelImage);
         jPanelImage.setLayout(jPanelImageLayout);
@@ -330,9 +342,11 @@ public class MainScreen extends javax.swing.JFrame {
         jLabelDamage.setForeground(new java.awt.Color(255, 255, 255));
         jLabelDamage.setText("Damage");
 
-        jProgressBarSpeed.setForeground(new java.awt.Color(153, 204, 0));
+        jProgressBarSpeed.setBackground(new java.awt.Color(255, 255, 255));
+        jProgressBarSpeed.setForeground(new java.awt.Color(0, 0, 0));
 
-        jProgressBarDamage.setForeground(new java.awt.Color(153, 204, 0));
+        jProgressBarDamage.setBackground(new java.awt.Color(255, 255, 255));
+        jProgressBarDamage.setForeground(new java.awt.Color(0, 0, 0));
 
         jTextFieldName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
@@ -381,6 +395,8 @@ public class MainScreen extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanelCharacterSelected.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabelImageCharacterSelected.setText("jLabel2");
 
         javax.swing.GroupLayout jPanelCharacterSelectedLayout = new javax.swing.GroupLayout(jPanelCharacterSelected);
@@ -399,6 +415,8 @@ public class MainScreen extends javax.swing.JFrame {
                 .addComponent(jLabelImageCharacterSelected)
                 .addGap(32, 32, 32))
         );
+
+        jPanelItemSelected.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabelItemSelected.setText("jLabel2");
 
@@ -517,14 +535,21 @@ public class MainScreen extends javax.swing.JFrame {
             paintImage(jPanelCharacterSelected, selectedFighter.getCurrentTexture(), jLabelCharacterSelected);
             jLabelSpeed.setText("Ammo");
             list = new CircularStructure();
+            try {
+                list.insert(JSONLoader.getIleveled(EIleveled.ITEMS));
+            } catch (ParseException | IOException ex) {
+                 System.out.println("Error al cargar los item");
+                Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
+               
+            }
+            this.jLabelSelection.setText("Select your Item");
             
-            this.jButtonStart.setEnabled(true);
+            current = list.first;
+            updateUI();
         }else if(this.selectedItem == null){ 
             selectedItem  = (Item) current.getIleveled();
             this.selectedFighter.addItem(selectedItem);
             paintImage(jPanelItemSelected, selectedItem.getCurrentTexture(), jLabelItemSelected);
-            
-        }else{
             this.jButtonStart.setEnabled(true);
         }
     }//GEN-LAST:event_jButtonDoneActionPerformed

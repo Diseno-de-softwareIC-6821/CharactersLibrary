@@ -23,6 +23,6 @@ public class Configuration {
     public static final int IMAGE_SIZE_SETTING  = 2;
     public static final String JSON_ROUTE = "CharacterBlueprints.json";
     //
-    
+    public static final String IMAGE_ROUTE  = "src\\Media\\";
     
 }

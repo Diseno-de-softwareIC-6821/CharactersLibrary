@@ -32,6 +32,7 @@ public class Board {
         this.size = size;
         this.fighter = fighter;
         generateSquares();
+        squares[0][0].changeState();
     }
     private void setFighter(Fighter oneFighter){
         this.fighter = oneFighter;
@@ -79,13 +80,13 @@ public class Board {
         boolean isValid = true;
         switch(nextMove){
             case MOVE_UP: 
-                if(this.fighter.getPosY()+1 >= this.size){isValid = false;}
-                break;
-            case MOVE_DOWN: 
                 if(this.fighter.getPosY()-1 <= -1 ){isValid = false;}
                 break;
+            case MOVE_DOWN: 
+                if(this.fighter.getPosY()+1 >= this.size){isValid = false;}
+                break;
             case MOVE_LEFT: 
-                if(this.fighter.getPosX()-1 <=0){ isValid = false ;}
+                if(this.fighter.getPosX()-1 <=-1){ isValid = false ;}
                 break;
             case MOVE_RIGHT: 
                 if(this.fighter.getPosX()+1 >=this.size){isValid = false;}
