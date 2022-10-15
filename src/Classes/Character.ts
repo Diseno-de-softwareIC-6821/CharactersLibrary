@@ -175,10 +175,21 @@ export class Character implements ILeveled, IPrototype, IJson {
             textureMapObject[key] = value;
         });
 
-        const itemsArray: any = [];
-        this.items.forEach((item) => {
-            itemsArray.push(item.toJson())
-        });
+        const selectedItem: any = {}
+        if(this.selectedItem){
+            Object.entries(this.selectedItem!).forEach(([key, value]) => {
+                if(key !== 'textureMap'){
+                    selectedItem[key] = value;
+                }
+                else{
+                    const textureMapObject: any = {};
+                    value.forEach((value: string, key: number) => {
+                        textureMapObject[key] = value;
+                    });
+                    selectedItem[key] = textureMapObject;
+                }
+            })
+        }
 
         let objectJson: any = {
             textureMap: textureMapObject,
@@ -202,7 +213,7 @@ export class Character implements ILeveled, IPrototype, IJson {
                     currentTexture: element.currentTexture
                 }
             }),
-            selectedItem: this.selectedItem,
+            selectedItem: selectedItem,
             name: this.name,
             level: this.level,
             experience: this.experience,
