@@ -420,9 +420,9 @@ public class MainScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStartActionPerformed
-        GameScreen newGame = new GameScreen((int) squaresSizeSpinner.getValue());
-        newGame.setVisible(true);
-        this.dispose();
+        //GameScreen newGame = new GameScreen((int) squaresSizeSpinner.getValue());
+        //newGame.setVisible(true);
+        //this.dispose();
     }//GEN-LAST:event_jButtonStartActionPerformed
 
     private void jButtonDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDoneActionPerformed
