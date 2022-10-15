@@ -1,15 +1,15 @@
 import { IJson } from "../Interfaces/iJson";
-import { ILeveled } from "../Interfaces/iLeveled";
+import { ILeveled } from "../Interfaces/ILeveled";
 import { IPrototype } from "../Interfaces/iPrototype";
-import { AItem } from "./itemClass";
+import { Item } from "./Item";
 
 export class Character implements ILeveled, IPrototype, IJson {
     
     textureMap: Map<number, string>;
     currentTexture: string;
 
-    items: AItem[];
-    selectedItem: AItem | null;
+    items: Item[];
+    selectedItem: Item | undefined;
 
     name: string;
     level: number;
@@ -32,8 +32,8 @@ export class Character implements ILeveled, IPrototype, IJson {
     constructor(
         textureMap: Map<number, string>, 
         currentTexture: string,
-        items: AItem[], 
-        selectedItem: AItem | null,
+        items: Item[], 
+        selectedItem: Item | undefined,
         name: string,
         level: number, 
         experience: number,
@@ -71,16 +71,18 @@ export class Character implements ILeveled, IPrototype, IJson {
     levelUp(): void {
         if(this.level < 100 && this.experience >= 100) {
             this.level += 1
+            this.experience = 0 
         }
     }
 
     levelDown(): void {
         if (this.level > 0 && this.experience < 0) {
             this.level -= 1;
+            this.experience = 0
         }
     }
 
-    getItems(): AItem[] {
+    getItems(): Item[] {
         return this.items;
     }
 
@@ -89,7 +91,7 @@ export class Character implements ILeveled, IPrototype, IJson {
     }
 
     setSelectedItem(itemName: string): void {
-        this.selectedItem = this.items.filter((item: AItem) => item.getName() === itemName)[0];
+        this.selectedItem = this.items.filter((item: Item) => item.getName() === itemName)[0];
     }
 
     move(posX: number, posY: number): void{
@@ -167,7 +169,69 @@ export class Character implements ILeveled, IPrototype, IJson {
     }
 
     toJson(): string {
-        return JSON.stringify(this);
+
+        const textureMapObject: any = {};
+        this.textureMap.forEach((value, key) => {
+            textureMapObject[key] = value;
+        });
+
+        const selectedItem: any = {}
+        if(this.selectedItem){
+            Object.entries(this.selectedItem!).forEach(([key, value]) => {
+                if(key !== 'textureMap'){
+                    selectedItem[key] = value;
+                }
+                else{
+                    const textureMapObject: any = {};
+                    value.forEach((value: string, key: number) => {
+                        textureMapObject[key] = value;
+                    });
+                    selectedItem[key] = textureMapObject;
+                }
+            })
+        }
+
+        let objectJson: any = {
+            textureMap: textureMapObject,
+            currentTexture: this.currentTexture,
+            items: this.items.map((element) => {
+                const textureMapObject: any = {};
+                element.getTextureMap().forEach((value, key) => {
+                    textureMapObject[key] = value;
+                })
+                return {
+                    name: element.name,
+                    type: element.type,
+                    level: element.level,
+                    scope: element.scope,
+                    duration: element.duration,
+                    damage: element.damage,
+                    exploRange: element.exploRange,
+                    weaponType: element.weaponType,
+                    ammo: element.ammo,
+                    textureMap: textureMapObject,
+                    currentTexture: element.currentTexture
+                }
+            }),
+            selectedItem: selectedItem,
+            name: this.name,
+            level: this.level,
+            experience: this.experience,
+            health: this.health,
+            damage: this.damage,
+            defense: this.defense,
+            speed: this.speed,
+            dps: this.dps,
+            cost: this.cost,
+            spawnLevel: this.spawnLevel,
+            housingSpace: this.housingSpace,
+            posX: this.posX,
+            posY: this.posY,
+        }
+
+
+        return JSON.stringify(objectJson, null, 2);
+
     }
 
 
@@ -177,8 +241,8 @@ export class Character implements ILeveled, IPrototype, IJson {
         textureMap: Map<number, string>;
         currentTexture: string;
 
-        items: AItem[];
-        selectedItem: AItem | null;
+        items: Item[];
+        selectedItem: Item | undefined;
     
         name: string;
         level: number;
@@ -203,7 +267,7 @@ export class Character implements ILeveled, IPrototype, IJson {
             this.currentTexture = "";
 
             this.items = [];
-            this.selectedItem = null;
+            this.selectedItem = undefined;
 
             this.name = "";
             this.level = 0;
@@ -229,17 +293,17 @@ export class Character implements ILeveled, IPrototype, IJson {
             return this;
         }
 
-        setCurrentTexture(currentTexture: string): CharacterBuilder {
-            this.currentTexture = currentTexture;
+        setCurrentTexture(currentTexture: number): CharacterBuilder {
+            this.currentTexture = this.textureMap.get(currentTexture)!;
             return this;
         }
 
-        setItems(items: AItem[]): CharacterBuilder {
+        setItems(items: Item[]): CharacterBuilder {
             this.items = items;
             return this;
         }
 
-        setSelectedItem(selectedItem: AItem): CharacterBuilder {
+        setSelectedItem(selectedItem: Item | undefined): CharacterBuilder {
             this.selectedItem = selectedItem;
             return this;
         }
@@ -315,7 +379,7 @@ export class Character implements ILeveled, IPrototype, IJson {
             return this;
         }
 
-        addItem(item: AItem): CharacterBuilder {
+        addItem(item: Item): CharacterBuilder {
             this.items.push(item);
             return this;
         }

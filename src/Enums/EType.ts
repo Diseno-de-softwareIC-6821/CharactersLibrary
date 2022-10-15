@@ -1,5 +1,5 @@
 
-enum EType{
+export const enum EType{
     HEALING,
     DAMAGE,
     NEUTRALIZER,
