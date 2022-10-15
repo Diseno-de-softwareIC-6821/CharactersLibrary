@@ -4,9 +4,29 @@
  */
 package Vista;
 
+import Control.JSONLoader;
+import Model.CharactersLibrary.Classes.Fighter;
+import Model.CharactersLibrary.Classes.Item;
+import Model.CharactersLibrary.Intefaces.ILeveled;
+import Model.CircularList.CircularStructure;
+import Model.CircularList.Node;
+import Model.Enums.EIleveled;
+import Model.GameClasses.Configuration;
+import java.awt.Color;
+import java.awt.Image;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.UIManager;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -17,13 +37,74 @@ public class MainScreen extends javax.swing.JFrame {
     /**
      * Creates new form MainScreen
      */
-    public MainScreen() {
+    CircularStructure list;
+    Node current;
+    private Fighter selectedFighter;
+    private Item selectedItem;
+    
+    
+    public MainScreen() throws Exception {
         initComponents();
         SpinnerModel smodel = new SpinnerNumberModel(2, 2, 20, 1);
+        list = new CircularStructure();
+        
+        ArrayList<ILeveled> characterList =  JSONLoader.getIleveled(EIleveled.FIGHTER);
+        
+        list.insert( characterList);
+        
         this.squaresSizeSpinner.setModel(smodel);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        current = list.first;
+        
+        jProgressBarSpeed.setStringPainted(true);
+        jProgressBarDamage.setStringPainted(true);
+        
+        updateUI();
     }
+    private void updateUI(){
+        String nameImage ="";
+        if(isFighter()){
+            Fighter oneFighter = (Fighter) current.getIleveled();
+            jTextFieldName.setText(oneFighter.getName());
+            jProgressBarSpeed.setValue((int) oneFighter.getSpeed());
+            //jProgressBarDamage.setValue((int));
+            nameImage = oneFighter.getCurrentTexture();
+            jProgressBarDamage.setValue((int)oneFighter.getDamage());
+        }else{
+            Item oneItem = (Item) current.getIleveled();
+            jTextFieldName.setText(oneItem.getName());
+            jProgressBarSpeed.setValue((int) oneItem.getAmmo());
+            nameImage = oneItem.getCurrentTexture();
+        
+        }
+        jPanelCharacterSelected.setSize(100, 100);
+        jPanelItemSelected.setSize(100,100);
+        paintImage(jPanelImageSelection, nameImage, jLabelImageSelection);
+
+        
+    }
+    private boolean isFighter(){
+        if(current.getIleveled() instanceof Fighter){
+            return true;
+        }
+        return false;
+    }   
+    private void paintImage(JPanel panel, String route, JLabel label){
+        route = Configuration.IMAGE_ROUTE.concat(route);
+        label.setSize(panel.getWidth(), panel.getHeight());
+        ImageIcon image = new ImageIcon(route);
+        Icon icon = new ImageIcon(image.getImage().getScaledInstance(
+                                    panel.getWidth(), 
+                                    panel.getHeight(), 
+                                    Image.SCALE_DEFAULT));
+
+        label.setIcon(icon);
+        label.setBounds(0, 0,    panel.getWidth(),  panel.getHeight());
+        panel.add(label);
+        panel.repaint();
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,24 +124,25 @@ public class MainScreen extends javax.swing.JFrame {
         squaresSizeSpinner = new javax.swing.JSpinner();
         jLabelSquaresXSquares = new javax.swing.JLabel();
         jLabelConfiguration = new javax.swing.JLabel();
-        jPanelSelection = new javax.swing.JPanel();
+        jPanelImageSelection = new javax.swing.JPanel();
         jButtonNext = new javax.swing.JButton();
         jButtonBack = new javax.swing.JButton();
-        jPanelImage = new javax.swing.JPanel();
         jButtonDone = new javax.swing.JButton();
         jLabelSelection = new javax.swing.JLabel();
+        jLabelImageSelection = new javax.swing.JLabel();
         jPanelStadistics = new javax.swing.JPanel();
         jLabelName = new javax.swing.JLabel();
         jLabelInformationTitle = new javax.swing.JLabel();
-        jLabelhealth = new javax.swing.JLabel();
         jLabelSpeed = new javax.swing.JLabel();
         jLabelDamage = new javax.swing.JLabel();
         jProgressBarSpeed = new javax.swing.JProgressBar();
         jProgressBarDamage = new javax.swing.JProgressBar();
-        jProgressBarHealth = new javax.swing.JProgressBar();
         jTextFieldName = new javax.swing.JTextField();
         jPanelCharacterSelected = new javax.swing.JPanel();
+        jLabelImageCharacterSelected = new javax.swing.JLabel();
         jPanelItemSelected = new javax.swing.JPanel();
+        jLabelItemSelected = new javax.swing.JLabel();
+        jLabelImageItemSelected = new javax.swing.JLabel();
         jLabelPlus = new javax.swing.JLabel();
         jLabelCharacterSelected = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -93,7 +175,7 @@ public class MainScreen extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(191, 191, 191)
                 .addComponent(jLabelMaintitle, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(190, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,6 +188,7 @@ public class MainScreen extends javax.swing.JFrame {
         jButtonStart.setBackground(new java.awt.Color(204, 255, 204));
         jButtonStart.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButtonStart.setText("Start");
+        jButtonStart.setEnabled(false);
         jButtonStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonStartActionPerformed(evt);
@@ -153,25 +236,21 @@ public class MainScreen extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanelSelection.setBackground(new java.awt.Color(208, 108, 51));
+        jPanelImageSelection.setBackground(new java.awt.Color(208, 108, 51));
 
         jButtonNext.setText("Next");
+        jButtonNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNextActionPerformed(evt);
+            }
+        });
 
         jButtonBack.setText("Back");
-
-        jPanelImage.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelImage.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(204, 0, 102), null, new java.awt.Color(102, 0, 0)));
-
-        javax.swing.GroupLayout jPanelImageLayout = new javax.swing.GroupLayout(jPanelImage);
-        jPanelImage.setLayout(jPanelImageLayout);
-        jPanelImageLayout.setHorizontalGroup(
-            jPanelImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanelImageLayout.setVerticalGroup(
-            jPanelImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        jButtonBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBackActionPerformed(evt);
+            }
+        });
 
         jButtonDone.setBackground(new java.awt.Color(219, 219, 124));
         jButtonDone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -186,45 +265,42 @@ public class MainScreen extends javax.swing.JFrame {
         jLabelSelection.setForeground(new java.awt.Color(255, 255, 255));
         jLabelSelection.setText("Select your character");
 
-        javax.swing.GroupLayout jPanelSelectionLayout = new javax.swing.GroupLayout(jPanelSelection);
-        jPanelSelection.setLayout(jPanelSelectionLayout);
-        jPanelSelectionLayout.setHorizontalGroup(
-            jPanelSelectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSelectionLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelSelectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSelectionLayout.createSequentialGroup()
-                        .addComponent(jPanelImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(169, 169, 169))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSelectionLayout.createSequentialGroup()
+        jLabelImageSelection.setText("  ");
+
+        javax.swing.GroupLayout jPanelImageSelectionLayout = new javax.swing.GroupLayout(jPanelImageSelection);
+        jPanelImageSelection.setLayout(jPanelImageSelectionLayout);
+        jPanelImageSelectionLayout.setHorizontalGroup(
+            jPanelImageSelectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelImageSelectionLayout.createSequentialGroup()
+                .addGap(137, 137, 137)
+                .addGroup(jPanelImageSelectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelImageSelectionLayout.createSequentialGroup()
+                        .addComponent(jLabelSelection)
+                        .addGap(127, 127, 127))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelImageSelectionLayout.createSequentialGroup()
+                        .addGroup(jPanelImageSelectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelImageSelection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanelImageSelectionLayout.createSequentialGroup()
+                                .addComponent(jButtonBack)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonNext)))
+                        .addGap(79, 79, 79)
                         .addComponent(jButtonDone)
-                        .addGap(186, 186, 186))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSelectionLayout.createSequentialGroup()
-                .addGroup(jPanelSelectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelSelectionLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelSelection))
-                    .addGroup(jPanelSelectionLayout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(jButtonBack)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonNext)))
-                .addGap(127, 127, 127))
+                        .addContainerGap())))
         );
-        jPanelSelectionLayout.setVerticalGroup(
-            jPanelSelectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelSelectionLayout.createSequentialGroup()
+        jPanelImageSelectionLayout.setVerticalGroup(
+            jPanelImageSelectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelImageSelectionLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelSelection)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanelImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanelSelectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(63, 63, 63)
+                .addComponent(jLabelImageSelection)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addGroup(jPanelImageSelectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonDone)
                     .addComponent(jButtonNext)
                     .addComponent(jButtonBack))
-                .addGap(18, 18, 18)
-                .addComponent(jButtonDone)
-                .addGap(34, 34, 34))
+                .addContainerGap())
         );
 
         jPanelStadistics.setBackground(new java.awt.Color(204, 102, 0));
@@ -237,10 +313,6 @@ public class MainScreen extends javax.swing.JFrame {
         jLabelInformationTitle.setForeground(new java.awt.Color(255, 255, 255));
         jLabelInformationTitle.setText("Stadistics");
 
-        jLabelhealth.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabelhealth.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelhealth.setText("Health");
-
         jLabelSpeed.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelSpeed.setForeground(new java.awt.Color(255, 255, 255));
         jLabelSpeed.setText("Speed");
@@ -249,11 +321,11 @@ public class MainScreen extends javax.swing.JFrame {
         jLabelDamage.setForeground(new java.awt.Color(255, 255, 255));
         jLabelDamage.setText("Damage");
 
-        jProgressBarSpeed.setForeground(new java.awt.Color(153, 204, 0));
+        jProgressBarSpeed.setBackground(new java.awt.Color(255, 255, 255));
+        jProgressBarSpeed.setForeground(new java.awt.Color(0, 0, 0));
 
-        jProgressBarDamage.setForeground(new java.awt.Color(153, 204, 0));
-
-        jProgressBarHealth.setForeground(new java.awt.Color(153, 204, 0));
+        jProgressBarDamage.setBackground(new java.awt.Color(255, 255, 255));
+        jProgressBarDamage.setForeground(new java.awt.Color(0, 0, 0));
 
         jTextFieldName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
@@ -268,20 +340,16 @@ public class MainScreen extends javax.swing.JFrame {
                     .addGroup(jPanelStadisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelStadisticsLayout.createSequentialGroup()
                             .addComponent(jLabelSpeed)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                             .addComponent(jProgressBarSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelStadisticsLayout.createSequentialGroup()
-                            .addComponent(jLabelDamage)
-                            .addGap(18, 18, 18)
-                            .addComponent(jProgressBarDamage, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanelStadisticsLayout.createSequentialGroup()
-                            .addGroup(jPanelStadisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabelhealth)
-                                .addComponent(jLabelName))
+                            .addComponent(jLabelName)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanelStadisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextFieldName)
-                                .addComponent(jProgressBarHealth, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))))
+                            .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanelStadisticsLayout.createSequentialGroup()
+                        .addComponent(jLabelDamage)
+                        .addGap(18, 18, 18)
+                        .addComponent(jProgressBarDamage, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
         jPanelStadisticsLayout.setVerticalGroup(
@@ -290,47 +358,62 @@ public class MainScreen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabelInformationTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelStadisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelStadisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelStadisticsLayout.createSequentialGroup()
-                        .addComponent(jLabelName)
-                        .addGap(17, 17, 17)
-                        .addGroup(jPanelStadisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanelStadisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelStadisticsLayout.createSequentialGroup()
-                                .addGroup(jPanelStadisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelStadisticsLayout.createSequentialGroup()
-                                        .addComponent(jLabelhealth)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(jPanelStadisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabelSpeed)
-                                            .addComponent(jProgressBarSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(jProgressBarHealth, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabelName)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabelDamage))
-                            .addComponent(jProgressBarDamage, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanelStadisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabelSpeed)
+                                    .addComponent(jProgressBarSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelDamage))
+                    .addComponent(jProgressBarDamage, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanelCharacterSelected.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanelCharacterSelectedLayout = new javax.swing.GroupLayout(jPanelCharacterSelected);
         jPanelCharacterSelected.setLayout(jPanelCharacterSelectedLayout);
         jPanelCharacterSelectedLayout.setHorizontalGroup(
             jPanelCharacterSelectedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 112, Short.MAX_VALUE)
+            .addGroup(jPanelCharacterSelectedLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jLabelImageCharacterSelected, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelCharacterSelectedLayout.setVerticalGroup(
             jPanelCharacterSelectedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCharacterSelectedLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelImageCharacterSelected)
+                .addGap(32, 32, 32))
         );
+
+        jPanelItemSelected.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanelItemSelectedLayout = new javax.swing.GroupLayout(jPanelItemSelected);
         jPanelItemSelected.setLayout(jPanelItemSelectedLayout);
         jPanelItemSelectedLayout.setHorizontalGroup(
             jPanelItemSelectedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelItemSelectedLayout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addGroup(jPanelItemSelectedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelImageItemSelected)
+                    .addComponent(jLabelItemSelected, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30))
         );
         jPanelItemSelectedLayout.setVerticalGroup(
             jPanelItemSelectedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelItemSelectedLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelImageItemSelected)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelItemSelected)
+                .addGap(25, 25, 25))
         );
 
         jLabelPlus.setFont(new java.awt.Font("Unispace", 0, 48)); // NOI18N
@@ -355,28 +438,26 @@ public class MainScreen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanelSelection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanelImageSelection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanelStadistics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabelCharacterSelected, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanelCharacterSelected, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelPlus, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jPanelCharacterSelected, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelPlus, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabelCharacterSelected))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jPanelItemSelected, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addGap(18, 18, 18))
         );
         jPanel2Layout.setVerticalGroup(
@@ -385,7 +466,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanelSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelImageSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanelStadistics, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -420,14 +501,48 @@ public class MainScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStartActionPerformed
-        //GameScreen newGame = new GameScreen((int) squaresSizeSpinner.getValue());
-        //newGame.setVisible(true);
-        //this.dispose();
+       
+            GameScreen newGame = new GameScreen((int) squaresSizeSpinner.getValue(), this.selectedFighter);
+            newGame.setVisible(true);
+            this.dispose();
+        
     }//GEN-LAST:event_jButtonStartActionPerformed
 
     private void jButtonDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDoneActionPerformed
-        
+        if(this.selectedFighter == null){
+            selectedFighter  = (Fighter) current.getIleveled();
+            
+            jLabelSpeed.setText("Ammo");
+            list = new CircularStructure();
+            try {
+                list.insert(JSONLoader.getIleveled(EIleveled.ITEMS));
+            } catch (ParseException | IOException ex) {
+                 System.out.println("Error al cargar los item");
+                Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
+               
+            }
+            this.jLabelSelection.setText("Select your Item");
+            paintImage(jPanelCharacterSelected, selectedFighter.getCurrentTexture(), jLabelImageCharacterSelected);
+            current = list.first;
+            updateUI();
+        }else if(this.selectedItem == null){ 
+            selectedItem  = (Item) current.getIleveled();
+            this.selectedFighter.addItem(selectedItem);
+            paintImage(jPanelItemSelected, selectedItem.getCurrentTexture(), jLabelImageItemSelected);
+            this.jButtonStart.setEnabled(true);
+        }
     }//GEN-LAST:event_jButtonDoneActionPerformed
+
+    private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
+        current = current.getNext();
+        updateUI();
+              
+    }//GEN-LAST:event_jButtonNextActionPerformed
+
+    private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
+        current = current.getBack();
+        updateUI();
+    }//GEN-LAST:event_jButtonBackActionPerformed
     public void ItemSelection(){
         this.jLabelSelection.setText("Choose one item");
         
@@ -462,7 +577,11 @@ public class MainScreen extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainScreen().setVisible(true);
+                try {
+                    new MainScreen().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -476,25 +595,26 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelCharacterSelected;
     private javax.swing.JLabel jLabelConfiguration;
     private javax.swing.JLabel jLabelDamage;
+    private javax.swing.JLabel jLabelImageCharacterSelected;
+    private javax.swing.JLabel jLabelImageItemSelected;
+    private javax.swing.JLabel jLabelImageSelection;
     private javax.swing.JLabel jLabelInformationTitle;
+    private javax.swing.JLabel jLabelItemSelected;
     private javax.swing.JLabel jLabelMaintitle;
     private javax.swing.JLabel jLabelName;
     private javax.swing.JLabel jLabelPlus;
     private javax.swing.JLabel jLabelSelection;
     private javax.swing.JLabel jLabelSpeed;
     private javax.swing.JLabel jLabelSquaresXSquares;
-    private javax.swing.JLabel jLabelhealth;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanelCharacterSelected;
-    private javax.swing.JPanel jPanelImage;
+    private javax.swing.JPanel jPanelImageSelection;
     private javax.swing.JPanel jPanelItemSelected;
-    private javax.swing.JPanel jPanelSelection;
     private javax.swing.JPanel jPanelStadistics;
     private javax.swing.JProgressBar jProgressBarDamage;
-    private javax.swing.JProgressBar jProgressBarHealth;
     private javax.swing.JProgressBar jProgressBarSpeed;
     private javax.swing.JTextField jTextFieldName;
     private javax.swing.JSpinner squaresSizeSpinner;

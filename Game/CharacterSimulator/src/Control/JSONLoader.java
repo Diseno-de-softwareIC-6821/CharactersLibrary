@@ -6,15 +6,20 @@ import java.util.HashMap;
 
 import Model.CharactersLibrary.Classes.Fighter;
 import Model.CharactersLibrary.Classes.Item;
+import Model.CharactersLibrary.Intefaces.ILeveled;
+import Model.Enums.EIleveled;
 import Model.Enums.EType;
 import Model.Enums.EWeapon;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
+import Model.GameClasses.Configuration;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class JSONLoader {
 
-    static private HashMap<Integer,String> textureMapLoader(JSONObject textureJSON){
+     private static HashMap<Integer,String> textureMapLoader(JSONObject textureJSON){
         HashMap<Integer,String> textureMap = new HashMap<>();
         textureMap.put(1, (String) ((JSONObject) textureJSON.get("textureMap")).get("1"));
         textureMap.put(3, (String) ((JSONObject) textureJSON.get("textureMap")).get("3"));
@@ -23,7 +28,7 @@ public class JSONLoader {
         return textureMap;
     }
 
-    static private EType eTypeSelecter(Integer type){
+     private static EType eTypeSelecter(Integer type){
         switch (type){
             case 0: {
                 return EType.HEALING;
@@ -43,7 +48,7 @@ public class JSONLoader {
         }
     }
 
-    static private EWeapon eWeaponSelecter(Integer type){
+     private static EWeapon eWeaponSelecter(Integer type){
         switch (type){
             case 0: {
                 return EWeapon.NO_WEAPON;
@@ -63,7 +68,7 @@ public class JSONLoader {
         }
     }
 
-    static private Item ItemConstructor(JSONObject itemJSON){
+    private static Item ItemConstructor(JSONObject itemJSON){
 
         return new Item((String) itemJSON.get("name"),
                 eTypeSelecter(((Long) itemJSON.get("type")).intValue()),
@@ -78,7 +83,7 @@ public class JSONLoader {
                 (String) itemJSON.get("currentTexture"));
     }
 
-    static public ArrayList<Item> ItemParser(JSONArray itemArrayJSON){
+    private static ArrayList<Item> ItemParser(JSONArray itemArrayJSON){
 
         ArrayList<Item> loadedCharItems= new ArrayList<>();
         //INSTANCE OF CHARACTERS IN ARRAYLIST
@@ -87,8 +92,21 @@ public class JSONLoader {
         }
         return loadedCharItems;
     }
+    public static ArrayList<Item> getAllItems() throws IOException, FileNotFoundException, ParseException{
+        JSONArray jsonCharArray = getJSON();
+        ArrayList<Item> allItemList = new ArrayList<>();
+        for (int i = 0; i < jsonCharArray.size(); i++){
+            JSONObject jobject = (JSONObject) jsonCharArray.get(i);
+                    
+            ArrayList<Item> items = ItemParser((JSONArray) jobject.get("items"));
+            for(Item item: items){
+                allItemList.add(item);
+            } 
+        }
+        return allItemList;
+    }
 
-    static private Fighter CharacterConstructor(JSONObject characterJSON){
+     private static Fighter CharacterConstructor(JSONObject characterJSON){
 
         ArrayList<Item> items = ItemParser((JSONArray) characterJSON.get("items"));
 
@@ -107,15 +125,44 @@ public class JSONLoader {
             ((Long) characterJSON.get("spawnLevel")).intValue(),
             ((Long) characterJSON.get("housingSpace")).intValue(),
             ((Long) characterJSON.get("posX")).intValue(),
-            ((Long) characterJSON.get("posY")).intValue());
+            ((Long) characterJSON.get("posY")).intValue(), 
+            ((Long) characterJSON.get("damage")).doubleValue());
     }
-
-    static public ArrayList<Fighter> CharacterParser() throws Exception{
-
-        //READS JSON
-        Object jsonFileRead = new JSONParser().parse(new FileReader("CharacterBlueprints.json"));
+    private static JSONArray getJSON( ) throws FileNotFoundException, IOException, ParseException{
+        Object jsonFileRead = new JSONParser().parse(new FileReader(Configuration.JSON_ROUTE));
         // TYPECASTING TO JSONARRAY
         JSONArray jsonCharArray = (JSONArray) jsonFileRead;
+        return jsonCharArray;
+    }
+    public static ArrayList<ILeveled> getIleveled(EIleveled ileveled) throws ParseException, IOException{
+        ArrayList<ILeveled> ileveledList = new ArrayList<>();
+ 
+        switch (ileveled) {
+            case FIGHTER:
+                ArrayList<Fighter> ChFighters = getAllFighters(); 
+                for(Fighter oneFighter : ChFighters){
+                    ileveledList.add(oneFighter);
+                }
+                break;
+            case ITEMS:
+                ArrayList<Item> chItems = getAllItems();
+                for(Item item: chItems){
+                    ileveledList.add(item);
+                }
+                break;
+            default:
+                
+        }
+        return ileveledList;
+
+    }
+  
+ 
+ 
+    public static ArrayList<Fighter> getAllFighters() throws ParseException, IOException {
+
+        //READS JSON
+        JSONArray jsonCharArray = getJSON();
 
         ArrayList<Fighter> loadedCharacters = new ArrayList<>();
         //INSTANCE OF CHARACTERS IN ARRAYLIST
@@ -126,3 +173,4 @@ public class JSONLoader {
     }
 
 }
+

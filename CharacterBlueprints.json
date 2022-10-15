@@ -1,42 +1,30 @@
 [
     {
         "textureMap": {
-          "0": "texture1",
-          "1": "texture2"
+          "1": "Barbaro1.png",
+          "3": "Barbaro2.png",
+          "6": "Barbaro3.png",
+          "9": "Barbaro4.png"
         },
-        "currentTexture": "texture1",
+        "currentTexture": "Barbaro1.png",
         "items": [
             {
               "name": "Sword",
-              "type": 0,
-              "level": 10,
-              "scope": 10,
+              "type": 1,
+              "level": 1,
+              "scope": 1,
               "duration": 10,
               "damage": 10,
-              "exploRange": 10,
-              "weaponType": 0,
-              "ammo": 10,
+              "exploRange": 1,
+              "weaponType": 2,
+              "ammo": 0,
               "textureMap": {
-                "0": "texture1",
-                "1": "texture2"
+                "1": "Espada1.png",
+                "3": "Espada2.png",
+                "6": "Espada3.png",
+                "9": "Espada4.png"
               },
-              "currentTexture": "texture1"
-            },
-            {
-              "name": "Sword",
-              "type": 0,
-              "level": 10,
-              "scope": 10,
-              "duration": 10,
-              "damage": 10,
-              "exploRange": 10,
-              "weaponType": 0,
-              "ammo": 10,
-              "textureMap": {
-                "0": "texture1",
-                "1": "texture2"
-              },
-              "currentTexture": "texture1"
+              "currentTexture": "Espada1.png"
             }
           ],
         "name": "Barbaro",
@@ -55,42 +43,30 @@
     },
     {
         "textureMap": {
-          "0": "texture1",
-          "1": "texture2"
+          "1": "Arquera1.png",
+          "3": "Arquera2.png",
+          "6": "Arquera3.png",
+          "9": "Arquera4.png"
         },
-        "currentTexture": "texture1",
+        "currentTexture": "Arquera1.png",
         "items": [
             {
-              "name": "Sword",
-              "type": 0,
-              "level": 10,
-              "scope": 10,
+              "name": "Bow",
+              "type": 2,
+              "level": 1,
+              "scope": 2,
               "duration": 10,
               "damage": 10,
-              "exploRange": 10,
-              "weaponType": 0,
+              "exploRange": 1,
+              "weaponType": 3,
               "ammo": 10,
               "textureMap": {
-                "0": "texture1",
-                "1": "texture2"
+                "1": "Arco1.png",
+                "3": "Arco2.png",
+                "6": "Arco3.png",
+                "9": "Arco4.png"
               },
-              "currentTexture": "texture1"
-            },
-            {
-              "name": "Sword",
-              "type": 0,
-              "level": 10,
-              "scope": 10,
-              "duration": 10,
-              "damage": 10,
-              "exploRange": 10,
-              "weaponType": 0,
-              "ammo": 10,
-              "textureMap": {
-                "0": "texture1",
-                "1": "texture2"
-              },
-              "currentTexture": "texture1"
+              "currentTexture": "Arco1.png"
             }
           ],
         "name": "Arquera",

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Model.CharactersLibrary.Classes;
 
 import Model.CharactersLibrary.Intefaces.ILeveled;
@@ -57,11 +54,11 @@ public class Item implements ILeveled{
     }
 
     public int getLevel() {
-        return level;
+        return (int)level;
     }
 
     public int getScope() {
-        return scope;
+        return (int) scope;
     }
 
     public double getDuration() {
@@ -73,11 +70,11 @@ public class Item implements ILeveled{
     }
 
     public int getExploRange() {
-        return exploRange;
+        return (int)exploRange;
     }
 
     public int getAmmo() {
-        return ammo;
+        return (int) ammo;
     }
 
     public String getCurrentTexture() {
@@ -100,4 +97,5 @@ public class Item implements ILeveled{
                 ", currentTexture='" + currentTexture + '\'' +
                 '}';
     }
+
 }

@@ -1,0 +1,87 @@
+[
+    {
+        "textureMap": {
+          "1": "Barbaro1.png",
+          "3": "Barbaro2.png",
+          "6": "Barbaro3.png",
+          "9": "Barbaro4.png"
+        },
+        "currentTexture": "Barbaro1.png",
+        "items": [
+            {
+              "name": "Sword",
+              "type": 1,
+              "level": 1,
+              "scope": 1,
+              "duration": 10,
+              "damage": 10,
+              "exploRange": 1,
+              "weaponType": 2,
+              "ammo": 0,
+              "textureMap": {
+                "1": "Espada1.png",
+                "3": "Espada2.png",
+                "6": "Espada3.png",
+                "9": "Espada4.png"
+              },
+              "currentTexture": "Espada1.png"
+            }
+          ],
+        "name": "Barbaro",
+        "level": 1,
+        "experience": 0,
+        "health": 100,
+        "damage": 10,
+        "defense": 10,
+        "speed": 10,
+        "dps": 10,
+        "cost": 10,
+        "spawnLevel": 0,
+        "housingSpace": 10,
+        "posX": 0,
+        "posY": 0
+    }
+
+    {
+        "textureMap": {
+          "1": "Arquera1.png",
+          "3": "Arquera2.png",
+          "6": "Arquera3.png",
+          "9": "Arquera4.png"
+        },
+        "currentTexture": "Arquera1.png",
+        "items": [
+            {
+              "name": "Bow",
+              "type": 2,
+              "level": 1,
+              "scope": 2,
+              "duration": 10,
+              "damage": 10,
+              "exploRange": 1,
+              "weaponType": 3,
+              "ammo": 10,
+              "textureMap": {
+                "1": "Arco1.png",
+                "3": "Arco2.png",
+                "6": "Arco3.png",
+                "9": "Arco4.png"
+              },
+              "currentTexture": "Arco1.png"
+            }
+          ],
+        "name": "Arquera",
+        "level": 1,
+        "experience": 0,
+        "health": 100,
+        "damage": 10,
+        "defense": 10,
+        "speed": 10,
+        "dps": 10,
+        "cost": 10,
+        "spawnLevel": 0,
+        "housingSpace": 10,
+        "posX": 0,
+        "posY": 0
+    }
+]
