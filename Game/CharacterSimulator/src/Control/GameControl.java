@@ -9,8 +9,10 @@ import Model.GameClasses.Proxy;
 import Vista.GameScreen;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.print.attribute.standard.Fidelity;
 
 /**
  *
@@ -71,7 +73,14 @@ public class GameControl extends Thread implements KeyListener {
             case KeyEvent.VK_S:
                 proxy.moveDown();
                 //down
-              
+                break;
+            
+            case KeyEvent.VK_SPACE:
+                proxy.attack(null);
+                break;
+            case KeyEvent.VK_RIGHT:
+                proxy.nextWeapon();
+                
                 break;
             default:
                 System.out.println("Another key have been pressed");

@@ -43,17 +43,21 @@ public class Square {
                                     labelImage.getHeight(), 
                                     Image.SCALE_DEFAULT));
         labelImage.setIcon(icon);
+        labelImage.setBounds(0, 0, panel.getWidth(),  panel.getHeight());
         this.panel.add(labelImage);
         this.panel.repaint();
     }
+
+    public JLabel getLabelImage() {
+        return labelImage;
+    }
+    
+    
     
   
     
     public void changeState(){
-        if(this.isOcupated){ //if is ocupated and this function is used is because the fighter gonna move
-            this.panel.remove(labelImage); // remove the image, the character is in another panel
-            this.panel.repaint();
-        }
+       
         this.isOcupated = !this.isOcupated;
        
     }
@@ -100,6 +104,14 @@ public class Square {
 
     public void setIsOcupated(boolean isOcupated) {
         this.isOcupated = isOcupated;
+    }
+
+    public boolean isIsOcupated() {
+        return isOcupated;
+    }
+
+    public Container getContainer() {
+        return container;
     }
     
     

@@ -9,5 +9,5 @@ package Model.GameClasses;
  * @author Esteb
  */
 public enum Container {
-    ITEM, VOID, HOLE;
+    ITEM, VOID, HOLE, SQUARE_LEVELUP, ENEMY;
 }

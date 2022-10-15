@@ -24,5 +24,7 @@ public class Configuration {
     public static final String JSON_ROUTE = "CharacterBlueprints.json";
     //
     public static final String IMAGE_ROUTE  = "src\\Media\\";
+    public static final int ENEMIES_PER_LEVEL = 2;
+    public static final double DAMAGE_PER_LEVEL_UP = 5;
     
 }

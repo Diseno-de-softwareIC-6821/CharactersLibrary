@@ -36,7 +36,8 @@ public class GameScreen extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setFocusable(true);
-        
+        this.jPanelImage.setSize(100, 100);
+        this.jPanelItemImage.setSize(100,100);
         this.addKeyListener(admGame);
     }
     
@@ -215,8 +216,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(jPanelImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addComponent(jProgressBarExperience, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jProgressBarExperience, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jlabelCharacterEXP, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
@@ -490,12 +491,13 @@ public class GameScreen extends javax.swing.JFrame {
     }
     private void paintImage(JPanel panel, String route, JLabel label){
         route = Configuration.IMAGE_ROUTE.concat(route);
-        label.setSize(panel.getWidth()/Configuration.IMAGE_SIZE_SETTING, panel.getHeight()/Configuration.IMAGE_SIZE_SETTING);
+        label.setSize(panel.getWidth(), panel.getHeight());
         ImageIcon image = new ImageIcon(route);
         Icon icon = new ImageIcon(image.getImage().getScaledInstance(
                                     label.getWidth(), 
                                     label.getHeight(), 
                                     Image.SCALE_DEFAULT));
+        label.setBounds(0, 0,    panel.getWidth(),  panel.getHeight());
         label.setIcon(icon);
         panel.add(label);
         panel.repaint();

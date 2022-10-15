@@ -7,6 +7,7 @@ package Model.CharactersLibrary.Classes;
 import Model.CharactersLibrary.Intefaces.ILeveled;
 
 import Model.CharactersLibrary.Intefaces.IAction;
+import Model.GameClasses.Configuration;
 
 
 import java.util.ArrayList;
@@ -35,6 +36,8 @@ public class Fighter implements  ILeveled,IAction {
     private int posX;
     private int posY;
     private double damage;
+    
+
 
     public Fighter(HashMap<Integer, String> textures, String currentTexture,
             ArrayList<Item> items, Item selectedItem, String name, int level, 
@@ -63,19 +66,33 @@ public class Fighter implements  ILeveled,IAction {
     public void addItem(Item newItem ){
         this.items.add(newItem);
     }
-    
+    public void deleteItem(){
+        this.items.remove(selectedItem);
+    }
 
-   
     
-    
+    private int getCurrentItemIndex( ){
+        int index = 0;
+        for(Item i : items){
+            if(i.equals(selectedItem)){
+                return index;
+            }
+            index+=1;
+        }
+        return index;
+    } 
+
     
     @Override
     public void levelUp() {
         this.level+=1;
+        this.damage +=Configuration.DAMAGE_PER_LEVEL_UP;
+        
     }
     @Override
     public void levelDown() {
         this.level-=1;
+        this.damage -=Configuration.DAMAGE_PER_LEVEL_UP;
     }
 
     @Override
@@ -177,6 +194,29 @@ public class Fighter implements  ILeveled,IAction {
 
     public double getDamage() {
         return damage;
+    }
+
+    @Override
+    public void nextWeapon() {
+        int index = getCurrentItemIndex();
+        if(index+1 >= this.items.size()){//this if make the list like circular
+            index = 0; //first
+        }else{
+            index+=1;//next
+        }
+        selectedItem = items.get(index);
+    }
+
+    public void attack(Fighter fighter) {
+        double totalDamage = selectedItem.damage;
+        if(selectedItem.damage >0){
+           totalDamage+=this.damage;
+        }
+        fighter.health-= totalDamage;
+    }
+
+    public void setDamage(double damage) {
+        this.damage = damage;
     }
 
     
