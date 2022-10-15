@@ -2,7 +2,7 @@ import { ILeveled } from "../Interfaces/ILeveled";
 import { IPrototype } from "../Interfaces/iPrototype";
 
 import { EType } from "../Enums/EType";
-import { eWeapon } from "../Enums/EWeapon";
+import { EWeapon } from "../Enums/EWeapon";
 
 export class Item implements ILeveled, IPrototype {
 
@@ -13,7 +13,7 @@ export class Item implements ILeveled, IPrototype {
     duration:number 
     damage :number
     exploRange :number
-    weaponType :eWeapon
+    weaponType :EWeapon
     ammo :number
     textureMap: Map<number, string>
     currentTexture: string
@@ -26,7 +26,7 @@ export class Item implements ILeveled, IPrototype {
         duration:number, 
         damage :number,
         exploRange :number,
-        weaponType :eWeapon,
+        weaponType :EWeapon,
         ammo :number,
         textureMap: Map<number, string>, 
         currentTexture: string,
